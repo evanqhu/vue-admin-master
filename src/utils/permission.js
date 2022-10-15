@@ -1,3 +1,4 @@
+// 权限判断函数，功能类似于v-permission自定义指令
 import store from '@/store'
 
 /**

@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
+    <!-- 切换角色的组件 -->
     <switch-roles @change="handleRolesChange" />
     <div :key="key" style="margin-top:30px;">
+      <!-- 自定义指令 admin -->
       <div>
         <span v-permission="['admin']" class="permission-alert">
           Only
@@ -11,7 +13,7 @@
           v-permission="['admin']"
         </el-tag>
       </div>
-
+      <!-- 自定义指令 editor -->
       <div>
         <span v-permission="['editor']" class="permission-alert">
           Only
@@ -21,7 +23,7 @@
           v-permission="['editor']"
         </el-tag>
       </div>
-
+      <!-- 自定义指令 admin editor -->
       <div>
         <span v-permission="['admin','editor']" class="permission-alert">
           Both
@@ -41,6 +43,7 @@
       </aside>
 
       <el-tabs type="border-card" style="width:550px;">
+        <!-- v-if 权限判断函数 -->
         <el-tab-pane v-if="checkPermission(['admin'])" label="Admin">
           Admin can see this
           <el-tag class="permission-sourceCode" type="info">

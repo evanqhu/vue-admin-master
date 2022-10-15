@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <el-button type="primary" @click="handleAddRole">New Role</el-button>
-
+    <el-button type="primary" @click="handleAddRole">新增角色</el-button>
+    <!-- 表格 -->
     <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border>
       <el-table-column align="center" label="Role Key" width="220">
         <template slot-scope="scope">
@@ -20,12 +20,12 @@
       </el-table-column>
       <el-table-column align="center" label="Operations">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="handleEdit(scope)">Edit</el-button>
-          <el-button type="danger" size="small" @click="handleDelete(scope)">Delete</el-button>
+          <el-button type="primary" size="small" @click="handleEdit(scope)">编辑权限</el-button>
+          <el-button type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-
+    <!-- 新增|编辑权限的对话框 -->
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'Edit Role':'New Role'">
       <el-form :model="role" label-width="80px" label-position="left">
         <el-form-item label="Name">
@@ -40,6 +40,7 @@
           />
         </el-form-item>
         <el-form-item label="Menus">
+          <!-- 用于路由权限选择的树形结构 -->
           <el-tree
             ref="tree"
             :check-strictly="checkStrictly"
@@ -64,69 +65,66 @@ import path from 'path'
 import { deepClone } from '@/utils'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/role'
 
-const defaultRole = {
+const defaultRole = { // 空的角色对象模板
   key: '',
   name: '',
   description: '',
-  routes: []
+  routes: [] // 某个角色具有的路由列表
 }
 
 export default {
   data() {
     return {
-      role: Object.assign({}, defaultRole),
-      routes: [],
-      rolesList: [],
-      dialogVisible: false,
-      dialogType: 'new',
+      role: Object.assign({}, defaultRole), // 角色对象 发送给服务器的
+      routes: [], // 所有路由列表 树形结构
+      rolesList: [], // 已添加的角色列表
+      dialogVisible: false, // 显示|隐藏对话框的标记
+      dialogType: 'new', // 新增|编辑角色的标记
       checkStrictly: false,
-      defaultProps: {
+      defaultProps: { // element树形结构的默认配置项
         children: 'children',
         label: 'title'
       }
     }
   },
   computed: {
+    // 感觉没什么用啊，直接用this.routes不行吗?
     routesData() {
       return this.routes
     }
   },
   created() {
     // Mock: get all routes and roles list from server
-    this.getRoutes()
-    this.getRoles()
+    this.getRoutes() // 获取所有路由列表
+    this.getRoles() // 获取已添加的角色列表
   },
   methods: {
+    // 获取所有路由列表
     async getRoutes() {
       const res = await getRoutes()
       this.serviceRoutes = res.data
       this.routes = this.generateRoutes(res.data)
     },
+    // 获取已添加的角色列表
     async getRoles() {
       const res = await getRoles()
       this.rolesList = res.data
     },
-
     // Reshape the routes structure so that it looks the same as the sidebar
+    // 好像是数组转树形结构?
     generateRoutes(routes, basePath = '/') {
       const res = []
-
       for (let route of routes) {
         // skip some route
         if (route.hidden) { continue }
-
         const onlyOneShowingChild = this.onlyOneShowingChild(route.children, route)
-
         if (route.children && onlyOneShowingChild && !route.alwaysShow) {
           route = onlyOneShowingChild
         }
-
         const data = {
           path: path.resolve(basePath, route.path),
           title: route.meta && route.meta.title
-
         }
-
         // recursive child routes
         if (route.children) {
           data.children = this.generateRoutes(route.children, data.path)
@@ -148,66 +146,65 @@ export default {
       })
       return data
     },
+    // 新增角色
     handleAddRole() {
+      this.dialogVisible = true
+      this.dialogType = 'new'
       this.role = Object.assign({}, defaultRole)
       if (this.$refs.tree) {
-        this.$refs.tree.setCheckedNodes([])
+        this.$refs.tree.setCheckedNodes([]) // 设置勾选的节点(空)
       }
-      this.dialogType = 'new'
-      this.dialogVisible = true
     },
+    // 编辑角色
     handleEdit(scope) {
-      this.dialogType = 'edit'
       this.dialogVisible = true
+      this.dialogType = 'edit'
       this.checkStrictly = true
-      this.role = deepClone(scope.row)
+      this.role = deepClone(scope.row) // 深拷贝当前编辑角色的信息
       this.$nextTick(() => {
         const routes = this.generateRoutes(this.role.routes)
-        this.$refs.tree.setCheckedNodes(this.generateArr(routes))
+        this.$refs.tree.setCheckedNodes(this.generateArr(routes)) // 设置勾选的节点
         // set checked state of a node not affects its father and child nodes
         this.checkStrictly = false
       })
     },
+    // 删除角色
     handleDelete({ $index, row }) {
       this.$confirm('Confirm to remove the role?', 'Warning', {
         confirmButtonText: 'Confirm',
         cancelButtonText: 'Cancel',
         type: 'warning'
-      })
-        .then(async() => {
-          await deleteRole(row.key)
-          this.rolesList.splice($index, 1)
-          this.$message({
-            type: 'success',
-            message: 'Delete succed!'
-          })
+      }).then(async() => {
+        await deleteRole(row.key)
+        this.rolesList.splice($index, 1)
+        this.$message({
+          type: 'success',
+          message: 'Delete succeeded!'
         })
-        .catch(err => { console.error(err) })
+      }).catch(err => { console.error(err) })
     },
+    // 生成树形结构的方法
     generateTree(routes, basePath = '/', checkedKeys) {
       const res = []
-
       for (const route of routes) {
         const routePath = path.resolve(basePath, route.path)
-
         // recursive child routes
         if (route.children) {
           route.children = this.generateTree(route.children, routePath, checkedKeys)
         }
-
         if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
           res.push(route)
         }
       }
       return res
     },
+    // 确认按键
     async confirmRole() {
       const isEdit = this.dialogType === 'edit'
-
-      const checkedKeys = this.$refs.tree.getCheckedKeys()
+      const checkedKeys = this.$refs.tree.getCheckedKeys() // 获取选中的路由
       this.role.routes = this.generateTree(deepClone(this.serviceRoutes), '/', checkedKeys)
 
-      if (isEdit) {
+      if (isEdit) { // 编辑角色
         await updateRole(this.role.key, this.role)
         for (let index = 0; index < this.rolesList.length; index++) {
           if (this.rolesList[index].key === this.role.key) {
@@ -215,7 +212,7 @@ export default {
             break
           }
         }
-      } else {
+      } else { // 新增角色
         const { data } = await addRole(this.role)
         this.role.key = data.key
         this.rolesList.push(this.role)
@@ -223,6 +220,7 @@ export default {
 
       const { description, key, name } = this.role
       this.dialogVisible = false
+      // 提示框
       this.$notify({
         title: 'Success',
         dangerouslyUseHTMLString: true,
