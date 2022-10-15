@@ -67,7 +67,7 @@
 │  │  └─modules
 │  ├─styles
 │  ├─utils
-│  │  ├─permission.js # 用于权限控制的pan'duan'ha v-permission
+│  │  ├─permission.js # 用于权限控制的判断函数，类似于 v-permission
 │  ├─vendor
 │  └─views
 │      ├─charts
