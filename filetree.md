@@ -67,8 +67,8 @@
 │  │  └─modules
 │  ├─styles # 样式
 │  ├─utils
-│  │  ├─clipboard.js # 点击复制的工具
 │  │  ├─auth.js # 与权限相关的函数，如保存token到cookie
+│  │  ├─clipboard.js # 点击复制的工具
 │  │  ├─permission.js # 用于权限控制的判断函数，类似于 v-permission
 │  │  └─validate.js # 各种验证的代码
 │  ├─vendor
