@@ -1,4 +1,4 @@
-const req = require.context('../../icons/svg', false, /\.svg$/)
+const req = require.context('@/icons/svg', false, /\.svg$/) // 引入文件
 const requireAll = requireContext => requireContext.keys()
 
 const re = /\.\/(.*)\.svg/

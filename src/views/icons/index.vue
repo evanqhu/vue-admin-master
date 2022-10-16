@@ -1,10 +1,11 @@
 <template>
-  <div class="icons-container">
+  <div class="app-container">
     <aside>
       <a href="https://panjiachen.github.io/vue-element-admin-site/guide/advanced/icon.html" target="_blank">Add and use
       </a>
     </aside>
     <el-tabs type="border-card">
+      <!-- 自己下载的图标 -->
       <el-tab-pane label="Icons">
         <div class="grid">
           <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateIconCode(item),$event)">
@@ -20,6 +21,7 @@
           </div>
         </div>
       </el-tab-pane>
+      <!-- element ui自带图标 -->
       <el-tab-pane label="Element-UI Icons">
         <div class="grid">
           <div v-for="item of elementIcons" :key="item" @click="handleClipboard(generateElementIconCode(item),$event)">
@@ -67,8 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icons-container {
-  margin: 10px 20px 0;
+.app-container {
   overflow: hidden;
 
   .grid {

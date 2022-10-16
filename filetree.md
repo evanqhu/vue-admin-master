@@ -7,71 +7,72 @@
 │  ├─store
 │  └─view
 ├─public
-├─src
-│  ├─api
-│  ├─assets
+├─src # 源代码目录
+│  ├─api # 后端接口
+│  ├─assets # 静态资源
 │  │  ├─401_images
 │  │  ├─404_images
 │  │  └─custom-theme
 │  │      └─fonts
-│  ├─components
+│  ├─components # 全局组件
 │  │  ├─BackToTop
 │  │  ├─Breadcrumb
 │  │  ├─Charts
 │  │  │  └─mixins
 │  │  ├─DndList
-│  │  ├─DragSelect
-│  │  ├─Dropzone
+│  │  ├─DragSelect # 可移动选择框
+│  │  ├─Dropzone # 文件上传组件
 │  │  ├─ErrorLog
 │  │  ├─GithubCorner
 │  │  ├─Hamburger
 │  │  ├─HeaderSearch
-│  │  ├─ImageCropper
+│  │  ├─ImageCropper # 图片上传和裁剪组件
 │  │  │  └─utils
 │  │  ├─JsonEditor
-│  │  ├─Kanban
+│  │  ├─Kanban # 可移动看板
 │  │  ├─MarkdownEditor
 │  │  ├─MDinput
 │  │  ├─Pagination
-│  │  ├─PanThumb
+│  │  ├─PanThumb # 图片hover效果
 │  │  ├─RightPanel
 │  │  ├─Screenfull
 │  │  ├─Share
 │  │  ├─SizeSelect
 │  │  ├─Sticky
 │  │  ├─SvgIcon
-│  │  ├─TextHoverEffect
+│  │  ├─TextHoverEffect # 文字hover动画效果
 │  │  ├─ThemePicker
-│  │  ├─Tinymce
+│  │  ├─Tinymce # 富文本编辑器
 │  │  │  └─components
 │  │  ├─Upload
 │  │  └─UploadExcel
-│  ├─directive
+│  ├─directive # 全局自定义指令
 │  │  ├─clipboard
-│  │  ├─el-drag-dialog
+│  │  ├─el-drag-dialog # 可移动对话框指令
 │  │  ├─el-table
 │  │  ├─permission # 用于权限控制的自定义指令 v-permission
-│  │  └─waves
-│  ├─filters
-│  ├─icons
-│  │  └─svg
-│  ├─layout
+│  │  └─waves # 点击水波纹指令
+│  ├─filters # 全局过滤器
+│  ├─icons # 全局图标
+│  │  └─svg # 存放下载的svg格式的图标
+│  ├─layout # 布局
 │  │  ├─components
 │  │  │  ├─Settings
 │  │  │  ├─Sidebar
 │  │  │  └─TagsView
 │  │  └─mixin
-│  ├─router
+│  ├─router # 路由
 │  │  └─modules
-│  ├─store
+│  ├─store # Vuex
 │  │  └─modules
-│  ├─styles
+│  ├─styles # 样式
 │  ├─utils
+│  │  ├─clipboard.js # 点击复制的工具
 │  │  ├─auth.js # 与权限相关的函数，如保存token到cookie
 │  │  ├─permission.js # 用于权限控制的判断函数，类似于 v-permission
 │  │  └─validate.js # 各种验证的代码
 │  ├─vendor
-│  └─views
+│  └─views # 路由组件
 │      ├─charts
 │      ├─clipboard
 │      ├─components-demo
