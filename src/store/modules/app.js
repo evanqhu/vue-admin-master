@@ -9,6 +9,21 @@ const state = {
   size: Cookies.get('size') || 'medium'
 }
 
+const actions = {
+  toggleSideBar({ commit }) {
+    commit('TOGGLE_SIDEBAR')
+  },
+  closeSideBar({ commit }, { withoutAnimation }) {
+    commit('CLOSE_SIDEBAR', withoutAnimation)
+  },
+  toggleDevice({ commit }, device) {
+    commit('TOGGLE_DEVICE', device)
+  },
+  setSize({ commit }, size) {
+    commit('SET_SIZE', size)
+  }
+}
+
 const mutations = {
   TOGGLE_SIDEBAR: state => {
     state.sidebar.opened = !state.sidebar.opened
@@ -30,21 +45,6 @@ const mutations = {
   SET_SIZE: (state, size) => {
     state.size = size
     Cookies.set('size', size)
-  }
-}
-
-const actions = {
-  toggleSideBar({ commit }) {
-    commit('TOGGLE_SIDEBAR')
-  },
-  closeSideBar({ commit }, { withoutAnimation }) {
-    commit('CLOSE_SIDEBAR', withoutAnimation)
-  },
-  toggleDevice({ commit }, device) {
-    commit('TOGGLE_DEVICE', device)
-  },
-  setSize({ commit }, size) {
-    commit('SET_SIZE', size)
   }
 }
 

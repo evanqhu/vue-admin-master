@@ -1,12 +1,15 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <!-- 左侧边栏组件 -->
     <sidebar class="sidebar-container" />
     <div :class="{hasTagsView:needTagsView}" class="main-container">
+      <!-- 顶部导航栏 -->
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
         <tags-view v-if="needTagsView" />
       </div>
+      <!-- 主题内容组件 -->
       <app-main />
       <!-- 右侧全局设置按钮 -->
       <right-panel v-if="showSettings">
@@ -34,13 +37,14 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
-    ...mapState({
+    ...mapState({ // Vuex中的数据
       sidebar: state => state.app.sidebar,
       device: state => state.app.device,
       showSettings: state => state.settings.showSettings,
       needTagsView: state => state.settings.tagsView,
       fixedHeader: state => state.settings.fixedHeader
     }),
+    // 动态类名，true表示用，false表示不用，根据类名设置不同的样式
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,

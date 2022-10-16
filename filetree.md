@@ -124,6 +124,7 @@
 ```
 
 * 每一个组件最外面都用一个div包裹，类名设为 `xxx-container`，如 `login-container` `app-container`
+* Layout布局最外面的div类名设置为 `app-wraper`，有te'shu
 * 每个svg图标组件外面用一个span包裹，类名设为 `svg-container`
 * 在登录页面只调用获取token的方法，然后在入口文件中用全局路由钩子调用获取用户信息的方法
 * 
