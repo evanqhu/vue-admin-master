@@ -1,3 +1,4 @@
+// 用户登录相关的数据和方法
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
@@ -7,18 +8,18 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [] // 用户角色信息
 }
 
 const actions = {
-  // user login
+  // user login 用户登录
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        commit('SET_TOKEN', data.token) // 将token存储到Vuex中
+        setToken(data.token) // 将token存储到cookie中
         resolve()
       }).catch(error => {
         reject(error)
@@ -26,7 +27,7 @@ const actions = {
     })
   },
 
-  // get user info
+  // get user info 获取用户信息
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
@@ -54,7 +55,7 @@ const actions = {
     })
   },
 
-  // user logout
+  // user logout 用户退出登录
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {

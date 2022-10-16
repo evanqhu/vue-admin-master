@@ -67,7 +67,9 @@
 │  │  └─modules
 │  ├─styles
 │  ├─utils
+│  │  ├─auth.js # 与权限相关的函数，如保存token到cookie
 │  │  ├─permission.js # 用于权限控制的判断函数，类似于 v-permission
+│  │  └─validate.js # 各种验证的代码
 │  ├─vendor
 │  └─views
 │      ├─charts
@@ -90,8 +92,8 @@
 │      │  └─components
 │      ├─guide
 │      ├─icons
-│      ├─login
-│      │  └─components
+│      ├─login # 登录页面
+│      │  └─components # 第三方登录的组件
 │      ├─nested
 │      │  ├─menu1
 │      │  │  ├─menu1-1
@@ -120,3 +122,7 @@
         └─utils
 ```
 
+* 每一个组件最外面都用一个div包裹，类名设为 `xxx-container`，如 `login-container` `app-container`
+* 每个svg图标组件外面用一个span包裹，类名设为 `svg-container`
+* 在登录页面只调用获取token的方法，然后在入口文件中用全局路由钩子调用获取用户信息的方法
+* 

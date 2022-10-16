@@ -1,3 +1,4 @@
+// 只是把模块中比较深层级的state拿出来了
 const getters = {
   sidebar: state => state.app.sidebar,
   size: state => state.app.size,

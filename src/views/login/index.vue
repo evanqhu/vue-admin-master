@@ -1,11 +1,11 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-
+    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
+      <!-- 登录标题 -->
       <div class="title-container">
         <h3 class="title">Login Form</h3>
       </div>
-
+      <!-- 用户名表单 -->
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -20,7 +20,7 @@
           autocomplete="on"
         />
       </el-form-item>
-
+      <!-- 密码表单 -->
       <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
         <el-form-item prop="password">
           <span class="svg-container">
@@ -44,9 +44,9 @@
           </span>
         </el-form-item>
       </el-tooltip>
-
+      <!-- 登录按钮 -->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
+      <!-- 友情提示 -->
       <div style="position:relative">
         <div class="tips">
           <span>Username : admin</span>
@@ -56,13 +56,13 @@
           <span style="margin-right:18px;">Username : editor</span>
           <span>Password : any</span>
         </div>
-
+        <!-- 第三方登录按钮 -->
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           Or connect with
         </el-button>
       </div>
     </el-form>
-
+    <!-- 第三方登录对话框 -->
     <el-dialog title="Or connect with" :visible.sync="showDialog">
       Can not be simulated on local, so please combine you own business simulation! ! !
       <br>
@@ -74,13 +74,14 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
-import SocialSign from './components/SocialSignin'
+import { validUsername } from '@/utils/validate' // 表单验证
+import SocialSign from './components/SocialSignin' // 第三方登录组件
 
 export default {
   name: 'Login',
   components: { SocialSign },
   data() {
+    // 验证用户名的规则
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -88,6 +89,7 @@ export default {
         callback()
       }
     }
+    // 验证密码的规则
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
@@ -104,14 +106,15 @@ export default {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
-      passwordType: 'password',
-      capsTooltip: false,
+      passwordType: 'password', // 显示和隐藏密码的标记
+      capsTooltip: false, // 大写提示
       loading: false,
-      showDialog: false,
+      showDialog: false, // 显示第三方登录对话框的标记
       redirect: undefined,
       otherQuery: {}
     }
   },
+  // 监听路由变化 ???
   watch: {
     $route: {
       handler: function(route) {
@@ -127,7 +130,7 @@ export default {
   created() {
     // window.addEventListener('storage', this.afterQRScan)
   },
-  mounted() {
+  mounted() { // 这里写了一个初始化时如果没有填充账号和密码则自动聚焦的逻辑
     if (this.loginForm.username === '') {
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
@@ -138,10 +141,12 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
+    // 检查是否大写模式 ???
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
     },
+    // 切换密码显示隐藏
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -152,10 +157,12 @@ export default {
         this.$refs.password.focus()
       })
     },
+    // 登录
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          // 通过Vuex派发用户登录的action
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             this.loading = false
@@ -168,6 +175,7 @@ export default {
         }
       })
     },
+    // ???
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
@@ -212,7 +220,7 @@ $cursor: #fff;
   }
 }
 
-/* reset element-ui css */
+/* reset element-ui css 重置element ui的默认样式*/
 .login-container {
   .el-input {
     display: inline-block;
