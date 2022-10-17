@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import elDragDialog from '@/directive/el-drag-dialog' // base on element-ui
+import elDragDialog from '@/directive/el-drag-dialog' // 使用自定义指令实现可拖拽的对话框
 
 export default {
   name: 'DragDialogDemo',

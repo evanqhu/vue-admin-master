@@ -8,7 +8,7 @@ const state = {
   name: '',
   avatar: '',
   introduction: '',
-  roles: [] // 用户角色信息
+  roles: [] // 用户角色信息 权限数组
 }
 
 const actions = {
@@ -27,7 +27,7 @@ const actions = {
     })
   },
 
-  // get user info 获取用户信息
+  // get user info 获取用户信息 在导航守卫中被调用
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
@@ -37,13 +37,13 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { roles, name, avatar, introduction } = data
+        const { roles, name, avatar, introduction } = data // 从服务器返回的数据中解构出用户信息
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
-
+        // 将用户信息存储到state中
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)

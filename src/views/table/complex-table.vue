@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 表格选项卡 -->
     <div class="filter-container">
       <el-input v-model="listQuery.title" placeholder="Title" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-select v-model="listQuery.importance" placeholder="Imp" clearable style="width: 90px" class="filter-item">
@@ -11,10 +12,10 @@
       <el-select v-model="listQuery.sort" style="width: 140px" class="filter-item" @change="handleFilter">
         <el-option v-for="item in sortOptions" :key="item.key" :label="item.label" :value="item.key" />
       </el-select>
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-button v-waves class="filter-item" style="margin-left:10px" type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-button class="filter-item" type="primary" icon="el-icon-edit" @click="handleCreate">
         Add
       </el-button>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
@@ -24,7 +25,7 @@
         reviewer
       </el-checkbox>
     </div>
-
+    <!-- 表格 -->
     <el-table
       :key="tableKey"
       v-loading="listLoading"
@@ -90,15 +91,17 @@
           <el-button v-if="row.status!='draft'" size="mini" @click="handleModifyStatus(row,'draft')">
             Draft
           </el-button>
-          <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleDelete(row,$index)">
-            Delete
-          </el-button>
+          <el-popconfirm title="确定删除吗？" style="margin-left:10px" @onConfirm="handleDelete(row,$index)">
+            <el-button v-if="row.status!='deleted'" slot="reference" size="mini" type="danger">
+              Delete
+            </el-button>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
-
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-
+    <!-- 分页器 -->
+    <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <!-- 添加|编辑表格行的对话框 -->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
         <el-form-item label="Type" prop="type">
@@ -133,7 +136,7 @@
         </el-button>
       </div>
     </el-dialog>
-
+    <!-- 显示阅读数据的对话框 -->
     <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
       <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
         <el-table-column prop="key" label="Channel" />
@@ -150,7 +153,7 @@
 import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import Pagination from '@/components/Pagination' // 基于element ui二次封装的分页器
 
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
@@ -185,7 +188,7 @@ export default {
   data() {
     return {
       tableKey: 0,
-      list: null,
+      list: null, // 展示的表格数据
       total: 0,
       listLoading: true,
       listQuery: {
@@ -201,7 +204,7 @@ export default {
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
       statusOptions: ['published', 'draft', 'deleted'],
       showReviewer: false,
-      temp: {
+      temp: { // 页面展示的一条表格数据
         id: undefined,
         importance: 1,
         remark: '',
@@ -230,16 +233,13 @@ export default {
     this.getList()
   },
   methods: {
+    // 获取表格数据
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
         this.list = response.data.items
         this.total = response.data.total
-
-        // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
+        this.listLoading = false
       })
     },
     handleFilter() {
@@ -267,15 +267,15 @@ export default {
       }
       this.handleFilter()
     },
-    resetTemp() {
+    resetTemp() { // 空格的表格数据模板
       this.temp = {
         id: undefined,
         importance: 1,
         remark: '',
         timestamp: new Date(),
         title: '',
-        status: 'published',
-        type: ''
+        type: '',
+        status: 'published'
       }
     },
     handleCreate() {
@@ -286,10 +286,11 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
+    // 新增表格行
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
+          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id 模拟生成一个ID
           this.temp.author = 'vue-element-admin'
           createArticle(this.temp).then(() => {
             this.list.unshift(this.temp)
@@ -304,6 +305,7 @@ export default {
         }
       })
     },
+    // 编辑按钮
     handleUpdate(row) {
       this.temp = Object.assign({}, row) // copy obj
       this.temp.timestamp = new Date(this.temp.timestamp)
@@ -313,6 +315,7 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
+    // 更新表格行
     updateData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
@@ -332,6 +335,7 @@ export default {
         }
       })
     },
+    // 删除表格行
     handleDelete(row, index) {
       this.$notify({
         title: 'Success',

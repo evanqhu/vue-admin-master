@@ -1,5 +1,6 @@
 <template>
   <el-select ref="dragSelect" v-model="selectVal" v-bind="$attrs" class="drag-select" multiple v-on="$listeners">
+    <!-- slot为el-option占位 -->
     <slot />
   </el-select>
 </template>

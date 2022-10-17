@@ -16,16 +16,16 @@
 │  │      └─fonts
 │  ├─components # 全局组件
 │  │  ├─BackToTop
-│  │  ├─Breadcrumb # 面包屑导航
+│  │  ├─Breadcrumb
 │  │  ├─Charts
 │  │  │  └─mixins
 │  │  ├─DndList
 │  │  ├─DragSelect # 可移动选择框
 │  │  ├─Dropzone # 文件上传组件
-│  │  ├─ErrorLog # 错误日志，很少用
+│  │  ├─ErrorLog
 │  │  ├─GithubCorner
-│  │  ├─Hamburger # 汉堡包导航，控制侧边栏展开和隐藏
-│  │  ├─HeaderSearch # 全局搜索
+│  │  ├─Hamburger
+│  │  ├─HeaderSearch
 │  │  ├─ImageCropper # 图片上传和裁剪组件
 │  │  │  └─utils
 │  │  ├─JsonEditor
@@ -34,8 +34,8 @@
 │  │  ├─MDinput
 │  │  ├─Pagination
 │  │  ├─PanThumb # 图片hover效果
-│  │  ├─RightPanel # 全局设置对话框组件，右侧
-│  │  ├─Screenfull # 全屏
+│  │  ├─RightPanel
+│  │  ├─Screenfull
 │  │  ├─Share
 │  │  ├─SizeSelect
 │  │  ├─Sticky
@@ -47,7 +47,7 @@
 │  │  ├─Upload
 │  │  └─UploadExcel
 │  ├─directive # 全局自定义指令
-│  │  ├─clipboard
+│  │  ├─clipboard # 点击按钮复制输入框内容的指令
 │  │  ├─el-drag-dialog # 可移动对话框指令
 │  │  ├─el-table
 │  │  ├─permission # 用于权限控制的自定义指令 v-permission
@@ -103,7 +103,7 @@
 │      │  │  │  └─menu1-2-2
 │      │  │  └─menu1-3
 │      │  └─menu2
-│      ├─pdf
+│      ├─pdf # 导出pdf
 │      ├─permission # 与权限验证相关的组件
 │      │  └─components
 │      ├─profile
@@ -115,7 +115,7 @@
 │      ├─table
 │      │  └─dynamic-table
 │      │      └─components
-│      ├─theme
+│      ├─theme # 换肤
 │      └─zip
 └─tests
     └─unit
@@ -127,4 +127,22 @@
 * Layout布局最外面的div类名设置为 `app-wraper`，有特殊的样式
 * 每个svg图标组件外面用一个span包裹，类名设为 `svg-container`
 * 在登录页面只调用获取token的方法，然后在入口文件中用全局路由钩子调用获取用户信息的方法
-* 
+
+
+
+### 封装element ui组件
+
+如el-breadcrumb，添加了动画效果，修改了样式等
+
+如drag-select封装了el-select，可以拖拽的选择框，选择了多个条目时，可以拖拽调整条目的位置
+
+如封装分页器，调整自己喜欢的颜色和样式
+
+
+
+* 创建一个 `.vue` 文件
+* 在template中写需要封装的element ui的组件
+* 在入口文件注册或需要使用的时候引入注册
+* 组件中需要灵活设置的地方，使用slot插槽自定义内容 `slot`
+* 使用props接收父组件传来的数据，如类名，属性等 `props`
+* 子组件传值给父组件，使用自定义事件 `$emit`

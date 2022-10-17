@@ -29,7 +29,7 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'permission_routes', // 当前角色的路由信息
+      'permission_routes', // 当前角色的全部路由信息 state.permission.routes
       'sidebar'
     ]),
     activeMenu() {

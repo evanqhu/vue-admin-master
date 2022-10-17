@@ -130,6 +130,7 @@ export const constantRoutes = [
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
+
 // 异步路由
 export const asyncRoutes = [
   {
@@ -159,7 +160,7 @@ export const asyncRoutes = [
         name: 'DirectivePermission',
         meta: {
           title: '指令权限'
-          // if do not set roles, means: this page does not require permission
+          // 如果不设置角色则表示当前组件不需要权限，都可访问
         }
       },
       {
