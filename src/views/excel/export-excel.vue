@@ -1,39 +1,37 @@
 <template>
   <div class="app-container">
 
-    <div>
+    <div class="excel-options">
       <FilenameOption v-model="filename" />
       <AutoWidthOption v-model="autoWidth" />
       <BookTypeOption v-model="bookType" />
-      <el-button :loading="downloadLoading" style="margin:0 0 20px 20px;" type="primary" icon="el-icon-document" @click="handleDownload">
+      <el-button
+        :loading="downloadLoading"
+        class="flex-item"
+        type="primary"
+        icon="el-icon-document"
+        @click="handleDownload"
+      >
         Export Excel
       </el-button>
-      <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
+      <a
+        href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html"
+        target="_blank"
+        class="flex-item"
+      >
         <el-tag type="info">Documentation</el-tag>
       </a>
     </div>
 
     <el-table v-loading="listLoading" :data="list" element-loading-text="Loading..." border fit highlight-current-row>
-      <el-table-column align="center" label="Id" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Title">
-        <template slot-scope="scope">
-          {{ scope.row.title }}
-        </template>
-      </el-table-column>
+      <el-table-column align="center" label="Id" type="index" width="95" />
+      <el-table-column label="Title" prop="title" />
       <el-table-column label="Author" width="110" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.author }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="Readings" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
+      <el-table-column label="Readings" prop="pageviews" width="115" align="center" />
       <el-table-column align="center" label="Date" width="220">
         <template slot-scope="scope">
           <i class="el-icon-time" />
@@ -86,9 +84,9 @@ export default {
         excel.export_json_to_excel({
           header: tHeader,
           data,
-          filename: this.filename,
-          autoWidth: this.autoWidth,
-          bookType: this.bookType
+          filename: this.filename, // 文件名
+          autoWidth: this.autoWidth, // 自动调整列宽
+          bookType: this.bookType // 文件格式
         })
         this.downloadLoading = false
       })
@@ -112,5 +110,16 @@ export default {
   color: #606266;
   line-height: 40px;
   padding: 0 12px 0 30px;
+}
+.flex-item {
+  display:inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+</style>
+<style scoped>
+.excel-options {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

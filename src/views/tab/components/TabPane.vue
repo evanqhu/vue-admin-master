@@ -79,7 +79,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 5,
-        type: this.type,
+        type: this.type, // 不同国家，得到不同的数据
         sort: '+id'
       },
       loading: false

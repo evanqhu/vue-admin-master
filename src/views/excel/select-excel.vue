@@ -1,12 +1,25 @@
 <template>
   <div class="app-container">
-    <el-input v-model="filename" placeholder="Please enter the file name (default excel-list)" style="width:350px;" prefix-icon="el-icon-document" />
-    <el-button :loading="downloadLoading" style="margin-bottom:20px" type="primary" icon="el-icon-document" @click="handleDownload">
+
+    <el-input
+      v-model="filename"
+      placeholder="Please enter the file name (default excel-list)"
+      style="width:350px;"
+      prefix-icon="el-icon-document"
+    />
+    <el-button
+      :loading="downloadLoading"
+      style="margin-bottom:20px;margin-left:15px"
+      type="primary"
+      icon="el-icon-document"
+      @click="handleDownload"
+    >
       Export Selected Items
     </el-button>
     <a href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html" target="_blank" style="margin-left:15px;">
       <el-tag type="info">Documentation</el-tag>
     </a>
+    <!-- 表格 -->
     <el-table
       ref="multipleTable"
       v-loading="listLoading"
@@ -18,26 +31,14 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" align="center" />
-      <el-table-column align="center" label="Id" width="95">
-        <template slot-scope="scope">
-          {{ scope.$index }}
-        </template>
-      </el-table-column>
-      <el-table-column label="Title">
-        <template slot-scope="scope">
-          {{ scope.row.title }}
-        </template>
-      </el-table-column>
+      <el-table-column align="center" label="Id" type="index" width="95" />
+      <el-table-column label="Title" prop="title" />
       <el-table-column label="Author" width="110" align="center">
         <template slot-scope="scope">
           <el-tag>{{ scope.row.author }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="Readings" width="115" align="center">
-        <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
+      <el-table-column label="Readings" prop="pageviews" width="115" align="center" />
       <el-table-column align="center" label="PDate" width="220">
         <template slot-scope="scope">
           <i class="el-icon-time" />

@@ -1,8 +1,8 @@
 <template>
-  <div style="display:inline-block;">
-    <label class="radio-label">Cell Auto-Width: </label>
+  <div class="flex-item">
+    <label class="radio-label" style="padding-left:0;">Cell Auto-Width: </label>
     <el-radio-group v-model="autoWidth">
-      <el-radio :label="true" border>
+      <el-radio :label="true" style="margin-right:0;" border>
         True
       </el-radio>
       <el-radio :label="false" border>

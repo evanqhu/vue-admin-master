@@ -14,7 +14,7 @@
 │  │  ├─404_images
 │  │  └─custom-theme
 │  │      └─fonts
-│  ├─components # 全局组件
+│  ├─components ######################################## 全局组件 
 │  │  ├─BackToTop
 │  │  ├─Breadcrumb
 │  │  ├─Charts
@@ -45,34 +45,34 @@
 │  │  ├─Tinymce # 富文本编辑器
 │  │  │  └─components
 │  │  ├─Upload
-│  │  └─UploadExcel
-│  ├─directive # 全局自定义指令
+│  │  └─UploadExcel # shan
+│  ├─directive ######################################## 全局自定义指令
 │  │  ├─clipboard # 点击按钮复制输入框内容的指令
 │  │  ├─el-drag-dialog # 可移动对话框指令
 │  │  ├─el-table
 │  │  ├─permission # 用于权限控制的自定义指令 v-permission
 │  │  └─waves # 点击水波纹指令
-│  ├─filters # 全局过滤器
-│  ├─icons # 全局图标
+│  ├─filters ######################################## 全局过滤器
+│  ├─icons ######################################## 全局图标
 │  │  └─svg # 存放下载的svg格式的图标
-│  ├─layout # 布局
+│  ├─layout ######################################## 布局
 │  │  ├─components
 │  │  │  ├─Settings
 │  │  │  ├─Sidebar
 │  │  │  └─TagsView
 │  │  └─mixin
-│  ├─router # 路由
+│  ├─router ######################################## 路由
 │  │  └─modules
-│  ├─store # Vuex
+│  ├─store ######################################## Vuex
 │  │  └─modules
-│  ├─styles # 样式
-│  ├─utils
+│  ├─styles ######################################## 样式
+│  ├─utils ######################################## 工具包
 │  │  ├─auth.js # 与权限相关的函数，如保存token到cookie
 │  │  ├─clipboard.js # 点击复制的工具
 │  │  ├─permission.js # 用于权限控制的判断函数，类似于 v-permission
 │  │  └─validate.js # 各种验证的代码
 │  ├─vendor
-│  └─views # 路由组件
+│  └─views ######################################## 路由组件
 │      ├─charts
 │      ├─clipboard
 │      ├─components-demo
