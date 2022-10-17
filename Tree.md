@@ -45,7 +45,7 @@
 │  │  ├─Tinymce # 富文本编辑器
 │  │  │  └─components
 │  │  ├─Upload
-│  │  └─UploadExcel # shan
+│  │  └─UploadExcel # 上传excel表格
 │  ├─directive ######################################## 全局自定义指令
 │  │  ├─clipboard # 点击按钮复制输入框内容的指令
 │  │  ├─el-drag-dialog # 可移动对话框指令
