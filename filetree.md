@@ -16,16 +16,16 @@
 │  │      └─fonts
 │  ├─components # 全局组件
 │  │  ├─BackToTop
-│  │  ├─Breadcrumb
+│  │  ├─Breadcrumb # 面包屑导航
 │  │  ├─Charts
 │  │  │  └─mixins
 │  │  ├─DndList
 │  │  ├─DragSelect # 可移动选择框
 │  │  ├─Dropzone # 文件上传组件
-│  │  ├─ErrorLog
+│  │  ├─ErrorLog # 错误日志，很少用
 │  │  ├─GithubCorner
-│  │  ├─Hamburger
-│  │  ├─HeaderSearch
+│  │  ├─Hamburger # 汉堡包导航，控制侧边栏展开和隐藏
+│  │  ├─HeaderSearch # 全局搜索
 │  │  ├─ImageCropper # 图片上传和裁剪组件
 │  │  │  └─utils
 │  │  ├─JsonEditor
@@ -34,8 +34,8 @@
 │  │  ├─MDinput
 │  │  ├─Pagination
 │  │  ├─PanThumb # 图片hover效果
-│  │  ├─RightPanel
-│  │  ├─Screenfull
+│  │  ├─RightPanel # 全局设置对话框组件，右侧
+│  │  ├─Screenfull # 全屏
 │  │  ├─Share
 │  │  ├─SizeSelect
 │  │  ├─Sticky

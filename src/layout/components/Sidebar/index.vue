@@ -1,5 +1,6 @@
 <template>
   <div :class="{'has-logo':showLogo}">
+    <!-- 侧边栏logo -->
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
@@ -28,7 +29,7 @@ export default {
   components: { SidebarItem, Logo },
   computed: {
     ...mapGetters([
-      'permission_routes',
+      'permission_routes', // 当前角色的路由信息
       'sidebar'
     ]),
     activeMenu() {

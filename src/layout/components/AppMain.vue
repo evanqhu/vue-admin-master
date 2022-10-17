@@ -1,7 +1,9 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
+      <!-- 使用了keep-alive -->
       <keep-alive :include="cachedViews">
+        <!-- 它的router-link在Sidebar组件的Link.vue中 -->
         <router-view :key="key" />
       </keep-alive>
     </transition>

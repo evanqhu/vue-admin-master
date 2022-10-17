@@ -1,4 +1,5 @@
 <template>
+  <!-- 如果是路由组件，component就变成router-link；如果是外部链接，就变成a标签 -->
   <component :is="type" v-bind="linkProps(to)">
     <slot />
   </component>

@@ -35,15 +35,8 @@ export function filterAsyncRoutes(routes, roles) {
 }
 
 const state = {
-  routes: [],
+  routes: [], // 当前角色的路由信息
   addRoutes: []
-}
-
-const mutations = {
-  SET_ROUTES: (state, routes) => {
-    state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
-  }
 }
 
 const actions = {
@@ -58,6 +51,13 @@ const actions = {
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })
+  }
+}
+
+const mutations = {
+  SET_ROUTES: (state, routes) => {
+    state.addRoutes = routes
+    state.routes = constantRoutes.concat(routes)
   }
 }
 

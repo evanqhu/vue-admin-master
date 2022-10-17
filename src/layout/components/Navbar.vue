@@ -1,23 +1,28 @@
 <template>
   <div class="navbar">
+    <!-- 汉堡包菜单 控制侧边栏展开或关闭的 -->
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
+    <!-- 面包屑导航 -->
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-
+    <!-- 顶部右侧用户设置区域 -->
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <search id="header-search" class="right-menu-item" />
-
+        <!-- 全局搜索 -->
+        <el-tooltip content="搜索" effect="dark" placement="bottom">
+          <search id="header-search" class="right-menu-item" />
+        </el-tooltip>
+        <!-- 错误日志，一般不显示，不用 -->
         <error-log class="errLog-container right-menu-item hover-effect" />
-
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
-        <el-tooltip content="Global Size" effect="dark" placement="bottom">
+        <!-- 全屏 -->
+        <el-tooltip content="全屏" effect="dark" placement="bottom">
+          <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        </el-tooltip>
+        <!-- 布局大小，好像暂时没效果? -->
+        <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
-
       </template>
-
+      <!-- 用户信息设置 -->
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
@@ -25,10 +30,10 @@
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/profile/index">
-            <el-dropdown-item>Profile</el-dropdown-item>
+            <el-dropdown-item>个人中心</el-dropdown-item>
           </router-link>
           <router-link to="/">
-            <el-dropdown-item>Dashboard</el-dropdown-item>
+            <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
           <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
             <el-dropdown-item>Github</el-dropdown-item>
@@ -47,8 +52,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
+import Breadcrumb from '@/components/Breadcrumb' // 面包屑导航
+import Hamburger from '@/components/Hamburger' // 汉堡包导航
 import ErrorLog from '@/components/ErrorLog'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
@@ -71,9 +76,11 @@ export default {
     ])
   },
   methods: {
+    // 折叠侧边栏
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
+    // 退出登录
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
@@ -123,7 +130,7 @@ export default {
 
     .right-menu-item {
       display: inline-block;
-      padding: 0 8px;
+      padding: 0 15px;
       height: 100%;
       font-size: 18px;
       color: #5a5e66;
@@ -140,7 +147,7 @@ export default {
     }
 
     .avatar-container {
-      margin-right: 30px;
+      margin-right: 20px;
 
       .avatar-wrapper {
         margin-top: 5px;
