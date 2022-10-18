@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-item">
+  <div>
     <label class="radio-label" style="padding-left:0;">Book Type: </label>
     <el-select v-model="bookType" style="width:120px;">
       <el-option

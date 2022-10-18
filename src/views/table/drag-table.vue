@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- Note that row-key is necessary to get a correct row order. -->
-    <el-table ref="dragTable" v-loading="listLoading" :data="list" row-key="id" border fit highlight-current-row style="width: 100%">
+    <el-table ref="dragTable" v-loading="listLoading" :data="list" row-key="id" border fit highlight-current-row style="width:100%">
       <el-table-column align="center" label="ID" width="65">
         <template slot-scope="{row}">
           <span>{{ row.id }}</span>
@@ -52,6 +52,7 @@
         </template>
       </el-table-column>
     </el-table>
+
     <div class="show-d">
       <el-tag>The default order :</el-tag> {{ oldList }}
     </div>
@@ -79,7 +80,7 @@ export default {
   },
   data() {
     return {
-      list: null,
+      list: [],
       total: null,
       listLoading: true,
       listQuery: {
@@ -95,6 +96,7 @@ export default {
     this.getList()
   },
   methods: {
+    // 获取表格数据
     async getList() {
       this.listLoading = true
       const { data } = await fetchList(this.listQuery)

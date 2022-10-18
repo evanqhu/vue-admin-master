@@ -130,9 +130,9 @@ aside {
   position: relative;
 }
 
-.pagination-container {
-  margin-top: 30px;
-}
+// .pagination-container { // 在该组件下单独设置样式了
+//   margin-top: 20px;
+// }
 
 .text-center {
   text-align: center
@@ -144,7 +144,7 @@ aside {
   position: relative;
   width: 100%;
   text-align: right;
-  padding-right: 20px;
+  padding-right: 40px;
   transition: 600ms ease position;
   background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
 

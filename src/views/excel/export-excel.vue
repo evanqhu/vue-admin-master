@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
 
-    <div class="excel-options">
-      <FilenameOption v-model="filename" />
-      <AutoWidthOption v-model="autoWidth" />
-      <BookTypeOption v-model="bookType" />
+    <div class="filter-container">
+      <FilenameOption v-model="filename" class="filter-item" />
+      <AutoWidthOption v-model="autoWidth" class="filter-item" />
+      <BookTypeOption v-model="bookType" class="filter-item" />
       <el-button
         :loading="downloadLoading"
-        class="flex-item"
+        class="filter-item"
         type="primary"
         icon="el-icon-document"
         @click="handleDownload"
@@ -17,7 +17,7 @@
       <a
         href="https://panjiachen.github.io/vue-element-admin-site/feature/component/excel.html"
         target="_blank"
-        class="flex-item"
+        class="filter-item"
       >
         <el-tag type="info">Documentation</el-tag>
       </a>
@@ -110,16 +110,5 @@ export default {
   color: #606266;
   line-height: 40px;
   padding: 0 12px 0 30px;
-}
-.flex-item {
-  display:inline-block;
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
-</style>
-<style scoped>
-.excel-options {
-  display: flex;
-  flex-wrap: wrap;
 }
 </style>

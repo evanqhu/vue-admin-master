@@ -31,14 +31,14 @@
 │  │  ├─JsonEditor
 │  │  ├─Kanban # 可移动看板
 │  │  ├─MarkdownEditor
-│  │  ├─MDinput
+│  │  ├─MDinput # 自己封装的input表单元素
 │  │  ├─Pagination
 │  │  ├─PanThumb # 图片hover效果
 │  │  ├─RightPanel
 │  │  ├─Screenfull
 │  │  ├─Share
 │  │  ├─SizeSelect
-│  │  ├─Sticky
+│  │  ├─Sticky # 粘性布局，吸顶工具栏
 │  │  ├─SvgIcon
 │  │  ├─TextHoverEffect # 文字hover动画效果
 │  │  ├─ThemePicker
@@ -146,3 +146,27 @@
 * 组件中需要灵活设置的地方，使用slot插槽自定义内容 `slot`
 * 使用props接收父组件传来的数据，如类名，属性等 `props`
 * 子组件传值给父组件，使用自定义事件 `$emit`
+
+### 表单
+
+* 对于有新增和编辑两种模式的表单，一般会有两个数据对象，一个放在data中，用于展示和收集数据，另外一个空白对象，放在computed中，用于初始化显示空白表单；
+
+### 过滤器
+
+* 将一个数据映射到另一个数据，可以用过滤器
+* 比如根据标签内容确定标签类型
+
+```javascript
+<el-tag :type="row.status | statusFilter" />
+filters: {
+  statusFilter(status) {
+    const statusMap = {
+      published: 'success',
+      draft: 'info',
+      deleted: 'danger'
+    }
+    return statusMap[status]
+  }
+},
+```
+

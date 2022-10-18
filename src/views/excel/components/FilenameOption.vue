@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-item">
+  <div>
     <label class="radio-label" style="padding-left:0;">Filename: </label>
     <el-input
       v-model="filename"

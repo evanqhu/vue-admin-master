@@ -1,16 +1,19 @@
 <template>
   <div class="createPost-container">
     <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
-
+      <!-- 头部工具栏 -->
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
         <CommentDropdown v-model="postForm.comment_disabled" />
-        <PlatformDropdown v-model="postForm.platforms" />
-        <SourceUrlDropdown v-model="postForm.source_uri" />
+        <PlatformDropdown v-model="postForm.platforms" style="margin-left: 10px;" />
+        <SourceUrlDropdown v-model="postForm.source_uri" style="margin-left: 10px;" />
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           Publish
         </el-button>
         <el-button v-loading="loading" type="warning" @click="draftForm">
           Draft
+        </el-button>
+        <el-button type="info" @click="backToList">
+          返回
         </el-button>
       </sticky>
 
@@ -76,9 +79,9 @@
 </template>
 
 <script>
-import Tinymce from '@/components/Tinymce'
-import Upload from '@/components/Upload/SingleImage3'
-import MDinput from '@/components/MDinput'
+import Tinymce from '@/components/Tinymce' // 富文本编辑器组件
+import Upload from '@/components/Upload/SingleImage3' // 资源上传组件
+import MDinput from '@/components/MDinput' // 输入框组件
 import Sticky from '@/components/Sticky' // 粘性header组件
 import { validURL } from '@/utils/validate'
 import { fetchArticle } from '@/api/article'
@@ -86,8 +89,8 @@ import { searchUser } from '@/api/remote-search'
 import Warning from './Warning'
 import { CommentDropdown, PlatformDropdown, SourceUrlDropdown } from './Dropdown'
 
-const defaultForm = {
-  status: 'draft',
+const defaultForm = { // 空白表单模板，用于新增时初始化空白表单
+  status: 'draft', // 草稿
   title: '', // 文章题目
   content: '', // 文章内容
   content_short: '', // 文章摘要
@@ -137,7 +140,7 @@ export default {
       }
     }
     return {
-      postForm: Object.assign({}, defaultForm),
+      postForm: Object.assign({}, defaultForm), // 页面显示和收集数据的文章表单
       loading: false,
       userListOptions: [],
       rules: {
@@ -167,9 +170,9 @@ export default {
     }
   },
   created() {
-    if (this.isEdit) {
+    if (this.isEdit) { // 如果是编辑文章
       const id = this.$route.params && this.$route.params.id
-      this.fetchData(id)
+      this.fetchData(id) // 从服务器获取文章信息
     }
 
     // Why need to make a copy of this.$route here?
@@ -178,6 +181,7 @@ export default {
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
+    // 获取文章信息
     fetchData(id) {
       fetchArticle(id).then(response => {
         this.postForm = response.data
@@ -204,8 +208,9 @@ export default {
       const title = 'Edit Article'
       document.title = `${title} - ${this.postForm.id}`
     },
+    // 发布文章
     submitForm() {
-      console.log(this.postForm)
+      // console.log(this.postForm)
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -213,7 +218,7 @@ export default {
             title: '成功',
             message: '发布文章成功',
             type: 'success',
-            duration: 2000
+            duration: 1000
           })
           this.postForm.status = 'published'
           this.loading = false
@@ -222,7 +227,9 @@ export default {
           return false
         }
       })
+      this.$router.push('/example')
     },
+    // 保存草稿
     draftForm() {
       if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
         this.$message({
@@ -238,6 +245,10 @@ export default {
         duration: 1000
       })
       this.postForm.status = 'draft'
+    },
+    // 返回文章列表
+    backToList() {
+      this.$router.push('/example')
     },
     getRemoteUserList(query) {
       searchUser(query).then(response => {
@@ -256,7 +267,7 @@ export default {
   position: relative;
 
   .createPost-main-container {
-    padding: 40px 45px 20px 50px;
+    padding: 40px;
 
     .postInfo-container {
       position: relative;

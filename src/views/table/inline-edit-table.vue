@@ -15,7 +15,7 @@
 
       <el-table-column width="120px" align="center" label="Author">
         <template slot-scope="{row}">
-          <span>{{ row.author }}</span>
+          <el-tag>{{ row.author }}</el-tag>
         </template>
       </el-table-column>
 
@@ -60,7 +60,7 @@
             icon="el-icon-circle-check-outline"
             @click="confirmEdit(row)"
           >
-            Ok
+            OK
           </el-button>
           <el-button
             v-else
@@ -82,6 +82,7 @@ import { fetchList } from '@/api/article'
 
 export default {
   name: 'InlineEditTable',
+  // 过滤器，根据状态返回tag类型
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -106,6 +107,7 @@ export default {
     this.getList()
   },
   methods: {
+    // 获取文章列表 表格数据
     async getList() {
       this.listLoading = true
       const { data } = await fetchList(this.listQuery)
@@ -117,6 +119,7 @@ export default {
       })
       this.listLoading = false
     },
+    // 取消编辑
     cancelEdit(row) {
       row.title = row.originalTitle
       row.edit = false
@@ -125,6 +128,7 @@ export default {
         type: 'warning'
       })
     },
+    // 确认修改
     confirmEdit(row) {
       row.edit = false
       row.originalTitle = row.title

@@ -205,6 +205,12 @@ export const asyncRoutes = [
     },
     children: [
       {
+        path: 'list',
+        component: () => import('@/views/example/list'),
+        name: 'ArticleList',
+        meta: { title: 'Article List', icon: 'list' }
+      },
+      {
         path: 'create',
         component: () => import('@/views/example/create'),
         name: 'CreateArticle',
@@ -216,12 +222,6 @@ export const asyncRoutes = [
         name: 'EditArticle',
         meta: { title: 'Edit Article', noCache: true, activeMenu: '/example/list' },
         hidden: true
-      },
-      {
-        path: 'list',
-        component: () => import('@/views/example/list'),
-        name: 'ArticleList',
-        meta: { title: 'Article List', icon: 'list' }
       }
     ]
   },

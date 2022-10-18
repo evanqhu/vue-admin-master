@@ -49,12 +49,12 @@
       <el-table-column label="Title" min-width="150px">
         <template slot-scope="{row}">
           <span class="link-type" @click="handleUpdate(row)">{{ row.title }}</span>
-          <el-tag>{{ row.type | typeFilter }}</el-tag>
+          <el-tag style="margin-left:10px">{{ row.type | typeFilter }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="Author" width="110px" align="center">
         <template slot-scope="{row}">
-          <span>{{ row.author }}</span>
+          <el-tag>{{ row.author }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column v-if="showReviewer" label="Reviewer" width="110px" align="center">
@@ -246,6 +246,7 @@ export default {
       this.listQuery.page = 1
       this.getList()
     },
+    // 更改草稿或发布状态
     handleModifyStatus(row, status) {
       this.$message({
         message: '操作Success',
@@ -253,12 +254,14 @@ export default {
       })
       row.status = status
     },
+    // 排序方式发生变化时
     sortChange(data) {
       const { prop, order } = data
       if (prop === 'id') {
         this.sortByID(order)
       }
     },
+    // 处理排序
     sortByID(order) {
       if (order === 'ascending') {
         this.listQuery.sort = '+id'
@@ -267,7 +270,8 @@ export default {
       }
       this.handleFilter()
     },
-    resetTemp() { // 空格的表格数据模板
+    // 清空重置表格数据模板
+    resetTemp() {
       this.temp = {
         id: undefined,
         importance: 1,
@@ -278,15 +282,16 @@ export default {
         status: 'published'
       }
     },
+    // 点击新增按钮
     handleCreate() {
-      this.resetTemp()
+      this.resetTemp() // 也可用计算属性赋值，计算属性里面写个空的模板
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    // 新增表格行
+    // 确认新增表格行
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
@@ -305,7 +310,7 @@ export default {
         }
       })
     },
-    // 编辑按钮
+    // 点击编辑按钮
     handleUpdate(row) {
       this.temp = Object.assign({}, row) // copy obj
       this.temp.timestamp = new Date(this.temp.timestamp)
@@ -315,7 +320,7 @@ export default {
         this.$refs['dataForm'].clearValidate()
       })
     },
-    // 更新表格行
+    // 确认更新表格行
     updateData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
@@ -335,7 +340,7 @@ export default {
         }
       })
     },
-    // 删除表格行
+    // 点击删除按钮
     handleDelete(row, index) {
       this.$notify({
         title: 'Success',
@@ -345,12 +350,14 @@ export default {
       })
       this.list.splice(index, 1)
     },
+    // 查看阅读量数据
     handleFetchPv(pv) {
       fetchPv(pv).then(response => {
         this.pvData = response.data.pvData
         this.dialogPvVisible = true
       })
     },
+    // 导出excel按钮
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
@@ -365,6 +372,7 @@ export default {
         this.downloadLoading = false
       })
     },
+    // 格式化数据的方法
     formatJson(filterVal) {
       return this.list.map(v => filterVal.map(j => {
         if (j === 'timestamp') {
@@ -374,6 +382,7 @@ export default {
         }
       }))
     },
+    // 排序
     getSortClass: function(key) {
       const sort = this.listQuery.sort
       return sort === `+${key}` ? 'ascending' : 'descending'
