@@ -170,3 +170,27 @@ filters: {
 },
 ```
 
+### 登录权限相关
+
+* 填完账号密码点击登录，只调用 `login` 方法，服务端返回token；
+* 先将token存在Vuex的state中，再存一份在cookie中；
+* 前端根据token调用获取用户信息 `getInfo` 方法，获取用户信息和权限和角色 `role` ；全局钩子拦截路由
+* 动态挂载路由
+
+* 创建vue实例的时候将vue-router挂载，但这个时候vue-router挂载一些登录或者不用权限的公用的页面。
+* 当用户登录后，获取用role，将role和路由表每个页面的需要的权限作比较，生成最终用户可访问的路由表。
+* 调用router.addRoutes(store.getters.addRouters)添加用户可访问的路由。
+* 使用vuex管理路由表，根据vuex中可访问的路由渲染侧边栏组件。
+
+### 规范
+
+* 没有文件夹的组件使用大驼峰命名 `GithubCorner.vue`
+* 有文件夹的组件，文件夹使用大驼峰命名，文件使用 `index.vue`；
+* views文件夹下面的是路由，所有的文件夹用小写短横线链接
+
+### 其他
+
+* 分栏布局 `el-row` 中，gutter表示栏间距；
+* 分栏布局，xs, sm, lg可以指定不同宽度时该列所占的宽度；
+* `svg-icon` 是注册的全局组件，任何地方都可以使用；
+* `count-to` 也是全局组件，可npm下载安装；
