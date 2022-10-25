@@ -33,14 +33,9 @@ import nestedRouter from './modules/nested'
   }
  */
 
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
-
 // 常量路由
 export const constantRoutes = [
+  // 重定向(不懂)
   {
     path: '/redirect',
     component: Layout,
@@ -52,26 +47,31 @@ export const constantRoutes = [
       }
     ]
   },
+  // 登录
   {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
+  // 权限重定向(不懂)
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
     hidden: true
   },
+  // 404
   {
     path: '/404',
     component: () => import('@/views/error-page/404'),
     hidden: true
   },
+  // 401
   {
     path: '/401',
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
+  // 根路径 -> 重定向到首页
   {
     path: '/',
     component: Layout,
@@ -81,10 +81,11 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true }
       }
     ]
   },
+  // 文档
   {
     path: '/documentation',
     component: Layout,
@@ -93,7 +94,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/documentation/index'),
         name: 'Documentation',
-        meta: { title: 'Documentation', icon: 'documentation', affix: true }
+        meta: { title: '文档', icon: 'documentation', affix: true }
       }
     ]
   },

@@ -36,7 +36,7 @@
 │  │  ├─PanThumb # 图片hover效果
 │  │  ├─RightPanel
 │  │  ├─Screenfull
-│  │  ├─Share
+│  │  ├─Share # 里面就放了一个Dropdown的组件
 │  │  ├─SizeSelect
 │  │  ├─Sticky # 粘性布局，吸顶工具栏
 │  │  ├─SvgIcon
@@ -187,6 +187,7 @@ filters: {
 * 没有文件夹的组件使用大驼峰命名 `GithubCorner.vue`
 * 有文件夹的组件，文件夹使用大驼峰命名，文件使用 `index.vue`；
 * views文件夹下面的是路由，所有的文件夹用小写短横线链接
+* 引入vue文件的时候写到vue文件名即可，不加后缀.vue
 
 ### 其他
 
