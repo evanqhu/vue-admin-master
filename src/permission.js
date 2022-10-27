@@ -10,7 +10,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
-// 导航守卫 全局钩子拦截路由，调用获取用户信息的方法
+// 全局前置路由守卫
 router.beforeEach(async(to, from, next) => {
   NProgress.start() // start progress bar
   document.title = getPageTitle(to.meta.title) // 设置页签标题
@@ -18,7 +18,7 @@ router.beforeEach(async(to, from, next) => {
 
   if (hasToken) {
     if (to.path === '/login') {
-      next({ path: '/' }) // 如果登录了，重定向到首页
+      next({ path: '/' }) // 如果有token(表示登录了)，还要去登录页，则放行到首页
       NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
     } else {
       // 判断是否通过getInfo方法获取了用户信息，包括路由权限信息
@@ -60,7 +60,7 @@ router.beforeEach(async(to, from, next) => {
   }
 })
 
+// 全局后置路由守卫
 router.afterEach(() => {
-  // finish progress bar
   NProgress.done()
 })
