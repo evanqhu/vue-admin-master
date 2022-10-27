@@ -85,16 +85,13 @@ const actions = {
     })
   },
 
-  // dynamically modify permissions
+  // 更改用户角色信息
   async changeRoles({ commit, dispatch }, role) {
     const token = role + '-token'
-
-    commit('SET_TOKEN', token)
+    commit('SET_TOKEN', token) // 更改token
     setToken(token)
-
-    const { roles } = await dispatch('getInfo')
-
-    resetRouter()
+    const { roles } = await dispatch('getInfo') // 重新获取用户信息
+    resetRouter() // 重置常量路由信息
 
     // generate accessible routes map based on roles
     const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })

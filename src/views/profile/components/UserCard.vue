@@ -1,5 +1,6 @@
 <template>
-  <el-card style="margin-bottom:20px;">
+  <el-card>
+    <!-- slot="header"表示卡片头 -->
     <div slot="header" class="clearfix">
       <span>About me</span>
     </div>
@@ -16,8 +17,9 @@
         <div class="user-role text-center text-muted">{{ user.role | uppercaseFirst }}</div>
       </div>
     </div>
-
+    <!-- biography 传记，生平 -->
     <div class="user-bio">
+      <!-- 教育经历 -->
       <div class="user-education user-bio-section">
         <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>Education</span></div>
         <div class="user-bio-section-body">
@@ -26,7 +28,7 @@
           </div>
         </div>
       </div>
-
+      <!-- 技能 -->
       <div class="user-skills user-bio-section">
         <div class="user-bio-section-header"><svg-icon icon-class="skill" /><span>Skills</span></div>
         <div class="user-bio-section-body">
@@ -53,7 +55,7 @@
 </template>
 
 <script>
-import PanThumb from '@/components/PanThumb'
+import PanThumb from '@/components/PanThumb' // 作者自定义的展示头像的组件
 
 export default {
   components: { PanThumb },

@@ -2,21 +2,24 @@
   <div class="app-container">
     <div v-if="user">
       <el-row :gutter="20">
-
+        <!-- 左侧关于我 用户卡片 -->
         <el-col :span="6" :xs="24">
           <user-card :user="user" />
         </el-col>
-
+        <!-- 右侧详细信息 -->
         <el-col :span="18" :xs="24">
           <el-card>
             <el-tabs v-model="activeTab">
               <el-tab-pane label="Activity" name="activity">
+                <!-- 活动 -->
                 <activity />
               </el-tab-pane>
               <el-tab-pane label="Timeline" name="timeline">
+                <!-- 时间线 -->
                 <timeline />
               </el-tab-pane>
               <el-tab-pane label="Account" name="account">
+                <!-- 账户 -->
                 <account :user="user" />
               </el-tab-pane>
             </el-tabs>
@@ -30,7 +33,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import UserCard from './components/UserCard'
+import UserCard from './components/UserCard' // 左侧用户卡片
 import Activity from './components/Activity'
 import Timeline from './components/Timeline'
 import Account from './components/Account'

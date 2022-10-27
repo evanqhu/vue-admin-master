@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Driver from 'driver.js' // import driver.js
+import Driver from 'driver.js' // import driver.js 用于新用户引导的
 import 'driver.js/dist/driver.min.css' // import driver.js css
 import steps from './steps'
 
@@ -28,8 +28,8 @@ export default {
   },
   methods: {
     guide() {
-      this.driver.defineSteps(steps)
-      this.driver.start()
+      this.driver.defineSteps(steps) // 定义步骤
+      this.driver.start() // 开始引导
     }
   }
 }

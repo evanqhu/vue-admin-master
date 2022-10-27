@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-button type="primary" @click="handleAddRole">新增角色</el-button>
-    <!-- 表格 -->
+    <!-- 角色和权限表格 -->
     <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border>
       <el-table-column align="center" label="Role Key" width="220">
         <template slot-scope="scope">
@@ -76,7 +76,7 @@ export default {
   data() {
     return {
       role: Object.assign({}, defaultRole), // 角色对象 发送给服务器的
-      routes: [], // 所有路由列表 树形结构
+      routes: [], // 所有路由列表 树形结构 这里是从服务器获取到的
       rolesList: [], // 已添加的角色列表
       dialogVisible: false, // 显示|隐藏对话框的标记
       dialogType: 'new', // 新增|编辑角色的标记
@@ -88,7 +88,7 @@ export default {
     }
   },
   computed: {
-    // 感觉没什么用啊，直接用this.routes不行吗?
+    // 这里是用于页面展示
     routesData() {
       return this.routes
     }
@@ -102,7 +102,7 @@ export default {
     // 获取所有路由列表
     async getRoutes() {
       const res = await getRoutes()
-      this.serviceRoutes = res.data
+      this.serviceRoutes = res.data // 返回的路由信息就是树型结构
       this.routes = this.generateRoutes(res.data)
     },
     // 获取已添加的角色列表
@@ -110,8 +110,7 @@ export default {
       const res = await getRoles()
       this.rolesList = res.data
     },
-    // Reshape the routes structure so that it looks the same as the sidebar
-    // 好像是数组转树形结构?
+    // 让路由列表变得和侧边栏一样(比如把不显示的路由去掉，像404，redirect等)
     generateRoutes(routes, basePath = '/') {
       const res = []
       for (let route of routes) {
@@ -133,6 +132,7 @@ export default {
       }
       return res
     },
+    // 根据角色路由信息生成待勾选的节点数组
     generateArr(routes) {
       let data = []
       routes.forEach(route => {
@@ -146,7 +146,7 @@ export default {
       })
       return data
     },
-    // 新增角色
+    // 新增角色按钮
     handleAddRole() {
       this.dialogVisible = true
       this.dialogType = 'new'
@@ -155,7 +155,7 @@ export default {
         this.$refs.tree.setCheckedNodes([]) // 设置勾选的节点(空)
       }
     },
-    // 编辑角色
+    // 编辑角色按钮
     handleEdit(scope) {
       this.dialogVisible = true
       this.dialogType = 'edit'
@@ -201,7 +201,7 @@ export default {
     // 确认按键
     async confirmRole() {
       const isEdit = this.dialogType === 'edit'
-      const checkedKeys = this.$refs.tree.getCheckedKeys() // 获取选中的路由
+      const checkedKeys = this.$refs.tree.getCheckedKeys() // 获取选中的路由 [数组]
       this.role.routes = this.generateTree(deepClone(this.serviceRoutes), '/', checkedKeys)
 
       if (isEdit) { // 编辑角色

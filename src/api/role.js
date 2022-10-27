@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 
+// 返回所有路由列表
 export function getRoutes() {
   return request({
     url: '/vue-element-admin/routes',

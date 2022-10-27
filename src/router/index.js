@@ -98,6 +98,7 @@ export const constantRoutes = [
       }
     ]
   },
+  // 引导页
   {
     path: '/guide',
     component: Layout,
@@ -107,10 +108,11 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/guide/index'),
         name: 'Guide',
-        meta: { title: 'Guide', icon: 'guide', noCache: true }
+        meta: { title: '引导页', icon: 'guide', noCache: true }
       }
     ]
   },
+  // 个人中心
   {
     path: '/profile',
     component: Layout,
@@ -127,23 +129,19 @@ export const constantRoutes = [
   }
 ]
 
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-
 // 异步路由
 export const asyncRoutes = [
+  // 权限
   {
     path: '/permission',
     component: Layout,
-    redirect: '/permission/page',
+    redirect: '/permission/page', // 重定向到第一个 页面权限
     alwaysShow: true, // will always show the root menu
     name: 'Permission',
     meta: {
       title: 'Permission',
       icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: ['admin', 'editor'] // 如果不写，就是都有权限，一旦写了，就要把有权限的角色都写上
     },
     children: [
       {
@@ -158,7 +156,7 @@ export const asyncRoutes = [
       {
         path: 'directive',
         component: () => import('@/views/permission/directive'),
-        name: 'DirectivePermission',
+        name: 'Directive Permission',
         meta: {
           title: '指令权限'
           // 如果不设置角色则表示当前组件不需要权限，都可访问
@@ -167,7 +165,7 @@ export const asyncRoutes = [
       {
         path: 'role',
         component: () => import('@/views/permission/role'),
-        name: 'RolePermission',
+        name: 'Role Permission',
         meta: {
           title: '角色权限',
           roles: ['admin']

@@ -6,8 +6,7 @@
       <!-- 自定义指令 admin -->
       <div>
         <span v-permission="['admin']" class="permission-alert">
-          Only
-          <el-tag class="permission-tag" size="small">admin</el-tag> can see this
+          Only <el-tag class="permission-tag" size="small">admin</el-tag> can see this
         </span>
         <el-tag v-permission="['admin']" class="permission-sourceCode" type="info">
           v-permission="['admin']"
@@ -16,8 +15,7 @@
       <!-- 自定义指令 editor -->
       <div>
         <span v-permission="['editor']" class="permission-alert">
-          Only
-          <el-tag class="permission-tag" size="small">editor</el-tag> can see this
+          Only <el-tag class="permission-tag" size="small">editor</el-tag> can see this
         </span>
         <el-tag v-permission="['editor']" class="permission-sourceCode" type="info">
           v-permission="['editor']"
@@ -36,7 +34,7 @@
       </div>
     </div>
 
-    <div :key="'checkPermission'+key" style="margin-top:60px;">
+    <div :key="'checkPermission'+key" style="margin-top:30px;">
       <aside>
         In some cases, using v-permission will have no effect. For example: Element-UI's Tab component or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.
         <br> e.g.
@@ -70,7 +68,7 @@
 </template>
 
 <script>
-import permission from '@/directive/permission/index.js' // 权限判断指令 自定义指令
+import permission from '@/directive/permission/index' // 权限判断指令 自定义指令
 import checkPermission from '@/utils/permission' // 权限判断函数
 import SwitchRoles from './components/SwitchRoles'
 

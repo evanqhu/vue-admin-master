@@ -23,7 +23,7 @@ export default {
       },
       set(val) {
         this.$store.dispatch('user/changeRoles', val).then(() => {
-          this.$emit('change')
+          this.$emit('change') // 触发父组件的改变角色的回调
         })
       }
     }

@@ -33,7 +33,7 @@
 │  │  ├─MarkdownEditor
 │  │  ├─MDinput # 自己封装的input表单元素
 │  │  ├─Pagination
-│  │  ├─PanThumb # 图片hover效果
+│  │  ├─PanThumb # 作者自定义的展示头像的组件
 │  │  ├─RightPanel
 │  │  ├─Screenfull
 │  │  ├─Share # 里面就放了一个Dropdown的组件
@@ -82,7 +82,7 @@
 │      │  │      ├─mixins
 │      │  │      └─TodoList
 │      │  └─editor
-│      ├─documentation
+│      ├─documentation # 文档
 │      ├─error-log
 │      │  └─components
 │      ├─error-page
@@ -91,7 +91,7 @@
 │      │      └─Dropdown
 │      ├─excel
 │      │  └─components
-│      ├─guide
+│      ├─guide # 引导页
 │      ├─icons
 │      ├─login # 登录页面
 │      │  └─components # 第三方登录的组件
@@ -109,7 +109,7 @@
 │      ├─profile
 │      │  └─components
 │      ├─qiniu
-│      ├─redirect
+│      ├─redirect # 重定向
 │      ├─tab
 │      │  └─components
 │      ├─table
@@ -127,6 +127,7 @@
 * Layout布局最外面的div类名设置为 `app-wraper`，有特殊的样式
 * 每个svg图标组件外面用一个span包裹，类名设为 `svg-container`
 * 在登录页面只调用获取token的方法，然后在入口文件中用全局路由钩子调用获取用户信息的方法
+* 好像把全局自定义指令都包装成插件引入了
 
 
 
