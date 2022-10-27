@@ -2,6 +2,7 @@
   <div class="app-container">
     <!-- 切换角色的组件 -->
     <switch-roles @change="handleRolesChange" />
+    <!-- 自定义指令权限控制 -->
     <div :key="key" style="margin-top:30px;">
       <!-- 自定义指令 admin -->
       <div>
@@ -33,7 +34,7 @@
         </el-tag>
       </div>
     </div>
-
+    <!-- v-if权限控制 -->
     <div :key="'checkPermission'+key" style="margin-top:30px;">
       <aside>
         In some cases, using v-permission will have no effect. For example: Element-UI's Tab component or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.

@@ -114,7 +114,7 @@ export default {
       otherQuery: {}
     }
   },
-  // 监听路由变化 ???
+  // 监听路由变化
   watch: {
     $route: {
       handler: function(route) {
@@ -141,7 +141,7 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
-    // 检查是否大写模式 ???
+    // 检查是否大写模式
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
@@ -157,7 +157,7 @@ export default {
         this.$refs.password.focus()
       })
     },
-    // 登录
+    // 点击登录按钮
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
@@ -175,7 +175,7 @@ export default {
         }
       })
     },
-    // ???
+    //
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
@@ -184,24 +184,6 @@ export default {
         return acc
       }, {})
     }
-    // afterQRScan() {
-    //   if (e.key === 'x-admin-oauth-code') {
-    //     const code = getQueryObject(e.newValue)
-    //     const codeMap = {
-    //       wechat: 'code',
-    //       tencent: 'code'
-    //     }
-    //     const type = codeMap[this.auth_type]
-    //     const codeName = code[type]
-    //     if (codeName) {
-    //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-    //         this.$router.push({ path: this.redirect || '/' })
-    //       })
-    //     } else {
-    //       alert('第三方登录失败')
-    //     }
-    //   }
-    // }
   }
 }
 </script>
