@@ -35,7 +35,7 @@ import nestedRouter from './modules/nested'
 
 // 常量路由
 export const constantRoutes = [
-  // 重定向(不懂)
+  // 重定向
   {
     path: '/redirect',
     component: Layout,
@@ -53,7 +53,7 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  // 权限重定向(不懂)
+  // 权限重定向
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
