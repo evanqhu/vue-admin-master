@@ -3,6 +3,7 @@
     <el-button type="primary" @click="dialogTableVisible = true">
       open a Drag Dialog
     </el-button>
+    <!-- 对话框 -->
     <el-dialog v-el-drag-dialog :visible.sync="dialogTableVisible" title="Shipping address" @dragDialog="handleDrag">
       <el-select ref="select" v-model="value" placeholder="请选择">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />

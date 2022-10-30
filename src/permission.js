@@ -1,25 +1,25 @@
 import router from './router'
 import store from './store'
 import { Message } from 'element-ui'
-import NProgress from 'nprogress' // progress bar 进度条
-import 'nprogress/nprogress.css' // progress bar style 进度条样式
-import { getToken } from '@/utils/auth' // get token from cookie
+import NProgress from 'nprogress' // 进度条
+import 'nprogress/nprogress.css' // 进度条样式
+import { getToken } from '@/utils/auth' // 从cookie中取到token
 import getPageTitle from '@/utils/get-page-title' // 获取页签标题
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+NProgress.configure({ showSpinner: false })
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
 // 全局前置路由守卫
 router.beforeEach(async(to, from, next) => {
-  NProgress.start() // start progress bar
+  NProgress.start() // 进度条开始
   document.title = getPageTitle(to.meta.title) // 设置页签标题
   const hasToken = getToken() // 根据token判断用户是否已登录
 
   if (hasToken) {
     if (to.path === '/login') {
       next({ path: '/' }) // 如果有token(表示登录了)，还要去登录页，则放行到首页
-      NProgress.done() // hack: https://github.com/PanJiaChen/vue-element-admin/pull/2939
+      NProgress.done()
     } else {
       // 判断是否通过getInfo方法获取了用户信息，包括路由权限信息
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
@@ -39,7 +39,7 @@ router.beforeEach(async(to, from, next) => {
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (error) {
-          // remove token and go to login page to re-login
+          // 移除token并跳转到登录页重新登录
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
@@ -62,5 +62,5 @@ router.beforeEach(async(to, from, next) => {
 
 // 全局后置路由守卫
 router.afterEach(() => {
-  NProgress.done()
+  NProgress.done() // 进度条结束
 })

@@ -15,7 +15,7 @@
       :autoplay="false"
       class="example"
     />
-    <div style="margin-left: 25%;margin-top: 40px;">
+    <div style="margin-top: 40px;">
       <label class="label" for="startValInput">startVal:
         <input v-model.number="setStartVal" type="number" name="startValInput">
       </label>
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       setStartVal: 0,
-      setEndVal: 2017,
+      setEndVal: 2022,
       setDuration: 4000,
       setDecimals: 0,
       setSeparator: ',',
@@ -134,7 +134,7 @@ export default {
   background-image: none;
   border: 1px solid transparent;
   white-space: nowrap;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   padding: 4px 15px;
   font-size: 12px;
   border-radius: 4px;
@@ -192,6 +192,7 @@ input {
 
 .startBtn {
   margin-left: 20px;
+  margin-right: 10px;
   font-size: 20px;
   color: #30B08F;
   background-color: #fff;

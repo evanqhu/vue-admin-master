@@ -35,7 +35,7 @@ import nestedRouter from './modules/nested'
 
 // 常量路由
 export const constantRoutes = [
-  // 重定向
+  // 重定向(不懂)
   {
     path: '/redirect',
     component: Layout,
@@ -53,7 +53,7 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  // 权限重定向
+  // 权限重定向(不懂)
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
@@ -150,7 +150,7 @@ export const asyncRoutes = [
         name: 'Page Permission',
         meta: {
           title: '页面权限',
-          roles: ['admin', 'editor'] // or you can only set roles in sub nav
+          roles: ['admin', 'editor']
         }
       },
       {
@@ -173,7 +173,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // 图标
   {
     path: '/icon',
     component: Layout,
@@ -182,7 +182,7 @@ export const asyncRoutes = [
         path: 'index',
         component: () => import('@/views/icons/index'),
         name: 'Icons',
-        meta: { title: 'Icons', icon: 'icon', noCache: true }
+        meta: { title: '图标', icon: 'icon', noCache: true }
       }
     ]
   },
@@ -192,14 +192,14 @@ export const asyncRoutes = [
   chartsRouter,
   nestedRouter,
   tableRouter,
-
+  // 综合实例
   {
     path: '/example',
     component: Layout,
     redirect: '/example/list',
     name: 'Example',
     meta: {
-      title: 'Example',
+      title: '综合实例',
       icon: 'el-icon-s-help'
     },
     children: [

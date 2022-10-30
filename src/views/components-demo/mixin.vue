@@ -1,5 +1,6 @@
 <template>
   <div class="mixin-components-container">
+    <!-- 按钮卡片 -->
     <el-row>
       <el-card class="box-card">
         <div slot="header" class="clearfix">
@@ -39,14 +40,14 @@
         </div>
       </el-card>
     </el-row>
-
+    <!-- 第二行 -->
     <el-row :gutter="20" style="margin-top:50px;">
       <el-col :span="6">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>Material Design 的input</span>
           </div>
-          <div style="height:100px;">
+          <div class="component-item">
             <el-form :model="demo" :rules="demoRules">
               <el-form-item prop="title">
                 <md-input v-model="demo.title" icon="el-icon-search" name="title" placeholder="输入标题">
@@ -95,7 +96,7 @@
         </el-card>
       </el-col>
     </el-row>
-
+    <!-- 第三行 -->
     <el-row :gutter="20" style="margin-top:50px;">
       <el-col :span="8">
         <el-card class="box-card">

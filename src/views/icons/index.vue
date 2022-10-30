@@ -8,7 +8,7 @@
       <!-- 自己下载的图标 -->
       <el-tab-pane label="Icons">
         <div class="grid">
-          <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateIconCode(item),$event)">
+          <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateIconCode(item), $event)">
             <el-tooltip placement="top">
               <div slot="content">
                 {{ generateIconCode(item) }}
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import clipboard from '@/utils/clipboard'
+import clipboard from '@/utils/clipboard' // 点击即复制的工具
 import svgIcons from './svg-icons'
 import elementIcons from './element-icons'
 
@@ -55,12 +55,15 @@ export default {
     }
   },
   methods: {
+    // 生成自定义Icon标签
     generateIconCode(symbol) {
       return `<svg-icon icon-class="${symbol}" />`
     },
+    // 生成element Icon标签
     generateElementIconCode(symbol) {
       return `<i class="el-icon-${symbol}" />`
     },
+    // 点击复制
     handleClipboard(text, event) {
       clipboard(text, event)
     }

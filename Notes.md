@@ -30,7 +30,7 @@
 │  │  │  └─utils
 │  │  ├─JsonEditor
 │  │  ├─Kanban # 可移动看板
-│  │  ├─MarkdownEditor
+│  │  ├─MarkdownEditor # Markdown编辑器
 │  │  ├─MDinput # 自己封装的input表单元素
 │  │  ├─Pagination
 │  │  ├─PanThumb # 作者自定义的展示头像的组件
@@ -75,7 +75,7 @@
 │  └─views ######################################## 路由组件
 │      ├─charts
 │      ├─clipboard
-│      ├─components-demo
+│      ├─components-demo # 组件
 │      ├─dashboard
 │      │  ├─admin
 │      │  │  └─components

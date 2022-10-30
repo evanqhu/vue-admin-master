@@ -14,7 +14,7 @@
         </el-dropdown-menu>
       </el-dropdown>
 
-      <el-dropdown trigger="click">
+      <el-dropdown trigger="click" style="margin-left: 10px;">
         <el-button plain>
           Link<i class="el-icon-caret-bottom el-icon--right" />
         </el-button>
@@ -27,7 +27,7 @@
         </el-dropdown-menu>
       </el-dropdown>
 
-      <div class="time-container">
+      <div class="time-container" style="margin-left: 10px;">
         <el-date-picker v-model="time" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="Release time" />
       </div>
 

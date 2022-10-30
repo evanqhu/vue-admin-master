@@ -20,7 +20,7 @@
       <el-tag class="tag-title">
         Markdown Mode:
       </el-tag>
-      <markdown-editor ref="markdownEditor" v-model="content2" :options="{hideModeSwitch:true,previewStyle:'tab'}" height="200px" />
+      <markdown-editor ref="markdownEditor" v-model="content2" :options="{hideModeSwitch:true, previewStyle:'tab'}" height="200px" />
     </div>
 
     <div class="editor-container">
