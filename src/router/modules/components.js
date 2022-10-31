@@ -83,25 +83,28 @@ const componentsRouter = {
       name: 'BackToTopDemo',
       meta: { title: '回到顶部' }
     },
-    // 可拖拽对话框
+    // 可拖拽对话框(自定义指令)
     {
       path: 'drag-dialog',
       component: () => import('@/views/components-demo/drag-dialog'),
       name: 'DragDialogDemo',
       meta: { title: '可拖拽对话框' }
     },
+    // 可拖拽选择
     {
       path: 'drag-select',
       component: () => import('@/views/components-demo/drag-select'),
       name: 'DragSelectDemo',
       meta: { title: 'Drag Select' }
     },
+    // 可拖拽列表
     {
       path: 'dnd-list',
       component: () => import('@/views/components-demo/dnd-list'),
       name: 'DndListDemo',
       meta: { title: 'Dnd List' }
     },
+    // 可拖拽看板
     {
       path: 'drag-kanban',
       component: () => import('@/views/components-demo/drag-kanban'),

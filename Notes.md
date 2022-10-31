@@ -19,7 +19,7 @@
 │  │  ├─Breadcrumb
 │  │  ├─Charts
 │  │  │  └─mixins
-│  │  ├─DndList
+│  │  ├─DndList # 可拖拽列表
 │  │  ├─DragSelect # 可移动选择框
 │  │  ├─Dropzone # 文件上传组件
 │  │  ├─ErrorLog
@@ -29,7 +29,7 @@
 │  │  ├─ImageCropper # 图片上传和裁剪组件
 │  │  │  └─utils
 │  │  ├─JsonEditor
-│  │  ├─Kanban # 可移动看板
+│  │  ├─Kanban # 可拖拽看板
 │  │  ├─MarkdownEditor # Markdown编辑器
 │  │  ├─MDinput # 自己封装的input表单元素
 │  │  ├─Pagination
