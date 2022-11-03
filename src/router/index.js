@@ -224,7 +224,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // Tab栏
   {
     path: '/tab',
     component: Layout,
@@ -237,7 +237,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // 错误页面
   {
     path: '/error',
     component: Layout,
@@ -262,7 +262,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // 错误日志
   {
     path: '/error-log',
     component: Layout,
@@ -275,7 +275,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // Excel
   {
     path: '/excel',
     component: Layout,
@@ -312,7 +312,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // Zip
   {
     path: '/zip',
     component: Layout,
@@ -329,7 +329,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // PDF
   {
     path: '/pdf',
     component: Layout,
@@ -348,7 +348,7 @@ export const asyncRoutes = [
     component: () => import('@/views/pdf/download'),
     hidden: true
   },
-
+  // 主题
   {
     path: '/theme',
     component: Layout,
@@ -361,7 +361,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // 点击复制
   {
     path: '/clipboard',
     component: Layout,
@@ -374,7 +374,7 @@ export const asyncRoutes = [
       }
     ]
   },
-
+  // 外链
   {
     path: 'external-link',
     component: Layout,
@@ -386,7 +386,7 @@ export const asyncRoutes = [
     ]
   },
 
-  // 404 page must be placed at the end !!!
+  // 404页必须放在最后
   { path: '*', redirect: '/404', hidden: true }
 ]
 

@@ -21,7 +21,7 @@
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         Export
       </el-button>
-      <el-checkbox v-model="showReviewer" class="filter-item" style="margin-left:15px;" @change="tableKey=tableKey+1">
+      <el-checkbox v-model="showReviewer" class="filter-item" @change="tableKey=tableKey+1">
         reviewer
       </el-checkbox>
     </div>
@@ -48,8 +48,8 @@
       </el-table-column>
       <el-table-column label="Title" min-width="150px">
         <template slot-scope="{row}">
-          <span class="link-type" @click="handleUpdate(row)">{{ row.title }}</span>
-          <el-tag style="margin-left:10px">{{ row.type | typeFilter }}</el-tag>
+          <span class="link-type" style="margin-right:10px" @click="handleUpdate(row)">{{ row.title }}</span>
+          <el-tag>{{ row.type | typeFilter }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column label="Author" width="110px" align="center">
@@ -187,10 +187,11 @@ export default {
   },
   data() {
     return {
-      tableKey: 0,
+      tableKey: 0, // Vue虚拟DOM的标志，让表格发生变化时可以重新渲染，操作表格列的时候，每次让它自加1即可
       list: null, // 展示的表格数据
       total: 0,
       listLoading: true,
+      // 获取表格数据时携带的参数
       listQuery: {
         page: 1,
         limit: 20,
@@ -244,7 +245,7 @@ export default {
     },
     handleFilter() {
       this.listQuery.page = 1
-      this.getList()
+      this.getList() // 更改listQuery.sort字段后重新获取列表，得到的就是重新排序后的列表
     },
     // 更改草稿或发布状态
     handleModifyStatus(row, status) {
@@ -256,6 +257,7 @@ export default {
     },
     // 排序方式发生变化时
     sortChange(data) {
+      // console.log(data) // order: "descending" prop: "id"
       const { prop, order } = data
       if (prop === 'id') {
         this.sortByID(order)
