@@ -48,6 +48,7 @@ module.exports = {
       }
     }
   },
+  // 对内部的webpack配置的修改
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
     // it can improve the speed of the first screen, it is recommended to turn on preload
