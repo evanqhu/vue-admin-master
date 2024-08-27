@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 进入本地仓库目录
-cd /Users/hu/胡强/GitHub/vue-admin-master
+cd /Users/evanqhu/code/admins/vue-admin-master
 
 # 检查是否存在未提交的修改
 if [ -n "$(git status --porcelain)" ]; then
