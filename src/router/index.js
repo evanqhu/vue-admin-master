@@ -1,41 +1,20 @@
+// 路由器
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 
-Vue.use(Router)
+Vue.use(VueRouter) // 安装路由插件
 
-/* Layout */
-import Layout from '@/layout'
+import Layout from '@/layout' // 引入布局组件
 
-/* Router Modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
-
-/**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    noCache: true                if set true, the page will no be cached(default is false)
-    affix: true                  if set true, the tag will affix in the tags-view
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
- */
+// 异步路由规则，拆分成了多个子模块
+import componentsRoutes from './modules/components'
+import chartsRoutes from './modules/charts'
+import tableRoutes from './modules/table'
+import nestedRoutes from './modules/nested'
 
 // 常量路由
 export const constantRoutes = [
-  // 重定向(不懂)
+  // 重定向
   {
     path: '/redirect',
     component: Layout,
@@ -53,7 +32,7 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  // 权限重定向(不懂)
+  // 权限重定向
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
@@ -81,14 +60,15 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true } // affix: true 表示固定在标签页，不可删除
       }
     ]
   },
-  // 文档
+  // 文档 (没有用 redirect)
   {
     path: '/documentation',
     component: Layout,
+    redirect: '/documentation/index',
     children: [
       {
         path: 'index',
@@ -186,12 +166,10 @@ export const asyncRoutes = [
       }
     ]
   },
-
-  /** when your routing map is too long, you can split it into small modules **/
-  componentsRouter,
-  chartsRouter,
-  nestedRouter,
-  tableRouter,
+  componentsRoutes,
+  chartsRoutes,
+  nestedRoutes,
+  tableRoutes,
   // 综合实例
   {
     path: '/example',
@@ -219,15 +197,20 @@ export const asyncRoutes = [
         path: 'edit/:id(\\d+)',
         component: () => import('@/views/example/edit'),
         name: 'EditArticle',
-        meta: { title: 'Edit Article', noCache: true, activeMenu: '/example/list' },
+        meta: {
+          title: 'Edit Article',
+          noCache: true,
+          activeMenu: '/example/list' // 侧边导航不存在 edit 页，但是希望在编辑文章的时候，侧边高亮 list 页
+        },
         hidden: true
       }
     ]
   },
-  // Tab栏
+  // Tab 栏
   {
     path: '/tab',
     component: Layout,
+    redirect: '/tab/index',
     children: [
       {
         path: 'index',
@@ -241,7 +224,8 @@ export const asyncRoutes = [
   {
     path: '/error',
     component: Layout,
-    redirect: 'noRedirect',
+    // redirect: 'noRedirect', // noRedirect 表示在面包屑中当前路由不可点击跳转 （但是这样会导致当地址栏为 /error 时报错，因为重定向的地址不存在）
+    redirect: '/error/401', // noRedirect 表示在面包屑中当前路由不可点击跳转
     name: 'ErrorPages',
     meta: {
       title: 'Error Pages',
@@ -262,7 +246,7 @@ export const asyncRoutes = [
       }
     ]
   },
-  // 错误日志
+  // 错误日志（只有一个子路由）
   {
     path: '/error-log',
     component: Layout,
@@ -281,10 +265,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/excel/export-excel',
     name: 'Excel',
-    meta: {
-      title: 'Excel',
-      icon: 'excel'
-    },
+    meta: { title: 'Excel', icon: 'excel' },
     children: [
       {
         path: 'export-excel',
@@ -312,7 +293,7 @@ export const asyncRoutes = [
       }
     ]
   },
-  // Zip
+  // Zip (只有一个子路由，但在侧边栏依然显示嵌套路由)
   {
     path: '/zip',
     component: Layout,
@@ -343,6 +324,7 @@ export const asyncRoutes = [
       }
     ]
   },
+  // PDF下载 （侧边栏隐藏当前路由）
   {
     path: '/pdf/download',
     component: () => import('@/views/pdf/download'),
@@ -352,6 +334,7 @@ export const asyncRoutes = [
   {
     path: '/theme',
     component: Layout,
+    redirect: '/theme/index',
     children: [
       {
         path: 'index',
@@ -365,6 +348,7 @@ export const asyncRoutes = [
   {
     path: '/clipboard',
     component: Layout,
+    redirect: '/clipboard/index',
     children: [
       {
         path: 'index',
@@ -385,23 +369,48 @@ export const asyncRoutes = [
       }
     ]
   },
-
   // 404页必须放在最后
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+/** 路由器实例创建工具函数 */
+const createRouter = () =>
+  new VueRouter({
+    // mode: 'history', // require service support 默认哈希模式
+    scrollBehavior: () => ({ y: 0 }), // 从一个路由导航到另一个路由时，页面会滚动到指定的位置
+    routes: constantRoutes // 初始化时路由列表
+  })
 
+/** 路由器实例 */
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+/** 重置路由 */
 export function resetRouter() {
   const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+  router.matcher = newRouter.matcher // reset router 重置旧的路由器实例的状态
+  // 允许开发者在运行时更改路由规则，而不需要重新创建整个路由实例或刷新页面
 }
 
 export default router
+
+/**
+ * Note: sub-menu only appear when route children.length >= 1
+ * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
+ *
+ * hidden: true                   if set true, item will not show in the sidebar (default is false)
+ * alwaysShow: true               if set true, will always show the root menu (default is false)
+ *                                if not set alwaysShow, when item has more than one children route,
+ *                                it will becomes nested mode, otherwise not show the root menu
+ * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * name:'router-name'             the name is used by <keep-alive> (must set!!!)
+ * meta : {
+    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
+    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
+    noCache: true                if set true, the page will no be cached (default is false)
+    affix: true                  if set true, the tag will affix in the tags-view
+    breadcrumb: false            if set false, the item will hidden in breadcrumb (default is true)
+    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+  }
+ */

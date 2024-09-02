@@ -1,8 +1,8 @@
-// import parseTime, formatTime and set to filter
+// 全局过滤器
 export { parseTime, formatTime } from '@/utils'
 
 /**
- * Show plural label if time is plural number
+ * Show plural label if time is plural number 时间复数
  * @param {number} time
  * @param {string} label
  * @return {string}

@@ -1,8 +1,8 @@
-/** When your routing table is too long, you can split it into small modules**/
-
+// 图表路由模块
 import Layout from '@/layout'
 
-const chartsRouter = {
+/** 图表路由模块 */
+const chartsRoutes = {
   path: '/charts',
   component: Layout,
   redirect: 'noRedirect',
@@ -36,4 +36,4 @@ const chartsRouter = {
   ]
 }
 
-export default chartsRouter
+export default chartsRoutes

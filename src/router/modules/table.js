@@ -1,11 +1,11 @@
-/** When your routing table is too long, you can split it into small modules **/
-
+// 表格路由模块
 import Layout from '@/layout'
 
-const tableRouter = {
+/** 表格路由模块 */
+const tableRoutes = {
   path: '/table',
   component: Layout,
-  redirect: '/table/complex-table', // 重定向到复杂表格
+  redirect: '/table/complex-table',
   name: 'Table',
   meta: {
     title: 'Table',
@@ -42,4 +42,5 @@ const tableRouter = {
     }
   ]
 }
-export default tableRouter
+
+export default tableRoutes

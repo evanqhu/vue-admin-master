@@ -47,12 +47,12 @@ const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
-      if (roles.includes('admin')) { // 如果用户包含admin角色，则添加所有的异步路由
+      if (roles.includes('admin')) { // 如果用户包含 admin 角色，则添加所有的异步路由
         accessedRoutes = asyncRoutes || []
       } else { // 根据角色信息递归过滤出符合权限的路由
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
       }
-      commit('SET_ROUTES', accessedRoutes) // 在state中保存异步路由和全部路由
+      commit('SET_ROUTES', accessedRoutes) // 在 state 中保存异步路由和全部路由
       resolve(accessedRoutes)
     })
   }

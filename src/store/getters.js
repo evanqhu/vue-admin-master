@@ -1,4 +1,4 @@
-// 只是把模块中比较深层级的state拿出来了
+// 只是把模块中比较深层级的 state 拿出来了
 const getters = {
   sidebar: state => state.app.sidebar,
   size: state => state.app.size,
@@ -13,4 +13,5 @@ const getters = {
   permission_routes: state => state.permission.routes,
   errorLogs: state => state.errorLog.logs
 }
+
 export default getters

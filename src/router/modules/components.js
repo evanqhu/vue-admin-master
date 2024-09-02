@@ -1,12 +1,11 @@
-/** When your routing table is too long, you can split it into small modules **/
+// 组件路由模块
+import Layout from '@/layout' // 引入布局组件
 
-import Layout from '@/layout'
-
-// 组件路由
-const componentsRouter = {
+/** 组件路由模块 */
+const componentsRoutes = {
   path: '/components',
   component: Layout,
-  redirect: 'noRedirect',
+  redirect: '/components/tinymce',
   name: 'ComponentDemo',
   meta: {
     title: '组件',
@@ -27,14 +26,14 @@ const componentsRouter = {
       name: 'MarkdownDemo',
       meta: { title: 'Markdown' }
     },
-    // json编辑器
+    // json 编辑器
     {
       path: 'json-editor',
       component: () => import('@/views/components-demo/json-editor'),
       name: 'JsonEditorDemo',
       meta: { title: 'JSON Editor' }
     },
-    // 垂直水平分割窗口(不懂)
+    // 垂直水平分割窗口
     {
       path: 'split-pane',
       component: () => import('@/views/components-demo/split-pane'),
@@ -76,14 +75,14 @@ const componentsRouter = {
       name: 'ComponentMixinDemo',
       meta: { title: 'Component Mixin' }
     },
-    // 回到顶部(重点学习一下)
+    // 回到顶部
     {
       path: 'back-to-top',
       component: () => import('@/views/components-demo/back-to-top'),
       name: 'BackToTopDemo',
       meta: { title: '回到顶部' }
     },
-    // 可拖拽对话框(自定义指令)
+    // 可拖拽对话框 (自定义指令)
     {
       path: 'drag-dialog',
       component: () => import('@/views/components-demo/drag-dialog'),
@@ -114,4 +113,4 @@ const componentsRouter = {
   ]
 }
 
-export default componentsRouter
+export default componentsRoutes

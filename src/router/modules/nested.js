@@ -1,8 +1,8 @@
-/** When your routing table is too long, you can split it into small modules **/
-
+// 嵌套路由模块
 import Layout from '@/layout'
 
-const nestedRouter = {
+/** 嵌套路由模块 */
+const nestedRoutes = {
   path: '/nested',
   component: Layout,
   redirect: '/nested/menu1/menu1-1',
@@ -63,4 +63,4 @@ const nestedRouter = {
   ]
 }
 
-export default nestedRouter
+export default nestedRoutes
