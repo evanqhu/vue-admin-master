@@ -1,3 +1,4 @@
+<!-- 登录 -->
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on">
@@ -26,6 +27,7 @@
           <span class="svg-container">
             <svg-icon icon-class="password" />
           </span>
+          <!-- TODO 这里的 key 似乎没什么用 -->
           <el-input
             :key="passwordType"
             ref="password"
@@ -45,6 +47,7 @@
         </el-form-item>
       </el-tooltip>
       <!-- 登录按钮 -->
+      <!-- TODO 为什么要 @click.native.prevent，直接 @click 不行吗 -->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
       <!-- 友情提示 -->
       <div style="position:relative">
@@ -103,15 +106,15 @@ export default {
         password: '111111'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }], // 数组中可以写多个对象，每个对象代表一个验证规则；可以用 messsge 来写提示信息
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password', // 显示和隐藏密码的标记
       capsTooltip: false, // 大写提示
-      loading: false,
+      loading: false, // 登录按钮的加载状态
       showDialog: false, // 显示第三方登录对话框的标记
-      redirect: undefined,
-      otherQuery: {}
+      redirect: undefined, // 重定向地址
+      otherQuery: {} // 其他参数
     }
   },
   // 监听路由变化
@@ -162,20 +165,21 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          // 通过Vuex派发用户登录的action
+          // 通过 Vuex 派发用户登录的 action
           this.$store.dispatch('user/login', this.loginForm).then(() => {
+            // 登录成功后跳转到 url 中的重定向地址，如果重定向地址不存在则跳转到首页
             this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             this.loading = false
           }).catch(() => {
             this.loading = false
           })
         } else {
-          console.log('error submit!!')
+          console.log('error submit!!!')
           return false
         }
       })
     },
-    //
+    // 获取其他参数
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
@@ -204,7 +208,7 @@ $cursor: #fff;
 
 /* reset element-ui css 重置element ui的默认样式*/
 .login-container {
-  .el-input {
+    .el-input {
     display: inline-block;
     height: 47px;
     width: 85%;
@@ -236,6 +240,7 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
+// 定义变量，变量的作用域为当前 style 标签
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
@@ -294,7 +299,7 @@ $light_gray:#eee;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
-    user-select: none;
+    user-select: none; // 禁止用户选中页面上的文本或元素，防止用户点击时误选中元素或禁止用户复制内容
   }
 
   .thirdparty-button {
@@ -303,6 +308,7 @@ $light_gray:#eee;
     bottom: 6px;
   }
 
+  // 媒体查询，当屏幕宽度小于等于 470px 时，隐藏第三方登录按钮
   @media only screen and (max-width: 470px) {
     .thirdparty-button {
       display: none;

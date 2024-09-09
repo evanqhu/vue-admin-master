@@ -1,4 +1,4 @@
-
+// user 用户相关接口
 const tokens = {
   admin: {
     token: 'admin-token'
@@ -24,7 +24,7 @@ const users = {
 }
 
 module.exports = [
-  // user login
+  // user login 用户登录
   {
     url: '/vue-element-admin/user/login',
     type: 'post',
@@ -47,7 +47,7 @@ module.exports = [
     }
   },
 
-  // get user info
+  // get user info 获取用户信息
   {
     url: '/vue-element-admin/user/info\.*',
     type: 'get',
@@ -70,7 +70,7 @@ module.exports = [
     }
   },
 
-  // user logout
+  // user logout 退出登录
   {
     url: '/vue-element-admin/user/logout',
     type: 'post',

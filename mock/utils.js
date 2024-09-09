@@ -1,6 +1,7 @@
 /**
  * @param {string} url
  * @returns {Object}
+ * @description 将 url 的 query 参数转为对象
  */
 function param2Obj(url) {
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
@@ -26,6 +27,7 @@ function param2Obj(url) {
  * If you want to use a perfect deep copy, use lodash's _.cloneDeep
  * @param {Object} source
  * @returns {Object}
+ * @description 深拷贝
  */
 function deepClone(source) {
   if (!source && typeof source !== 'object') {

@@ -1,3 +1,4 @@
+// 主样式文件
 @import './variables.scss';
 @import './mixin.scss';
 @import './transition.scss';
@@ -19,7 +20,7 @@ label {
 
 html {
   height: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box; // 设置盒模型为 border-box，更方便设置宽高
 }
 
 #app {

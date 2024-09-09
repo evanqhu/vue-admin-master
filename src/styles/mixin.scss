@@ -1,3 +1,6 @@
+// 混合器 可重用的样式片段，可通过 @include 引入
+
+// 清除浮动
 @mixin clearfix {
   &:after {
     content: "";
@@ -6,6 +9,7 @@
   }
 }
 
+// 滚动条
 @mixin scrollBar {
   &::-webkit-scrollbar-track-piece {
     background: #d3dce6;
@@ -21,6 +25,7 @@
   }
 }
 
+// 相对定位
 @mixin relative {
   position: relative;
   width: 100%;
@@ -33,6 +38,7 @@
   margin: 0 auto;
 }
 
+// 三角形
 @mixin triangle($width, $height, $color, $direction) {
   $width: $width/2;
   $color-border-style: $height solid $color;

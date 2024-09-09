@@ -18,8 +18,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
-        commit('SET_TOKEN', data.token) // 将token存储到Vuex中
-        setToken(data.token) // 将token存储到cookie中
+        commit('SET_TOKEN', data.token) // 将 token 存储到 Vuex 中 (admin-token or editor-token)
+        setToken(data.token) // 将 token 存储到 cookie 中
         resolve()
       }).catch(error => {
         reject(error)
