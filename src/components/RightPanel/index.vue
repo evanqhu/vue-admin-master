@@ -1,3 +1,4 @@
+<!-- 右侧全局设置面板 -->
 <template>
   <div ref="rightPanel" :class="{show:show}" class="rightPanel-container">
     <div class="rightPanel-background" />

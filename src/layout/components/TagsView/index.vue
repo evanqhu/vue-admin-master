@@ -1,3 +1,4 @@
+<!-- TODO 标签视图 -->
 <template>
   <div id="tags-view-container" class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper" @scroll="handleScroll">
@@ -16,6 +17,7 @@
         <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
       </router-link>
     </scroll-pane>
+    <!-- 在标签上右键点击时的选项 -->
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
       <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>

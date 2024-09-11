@@ -2,7 +2,7 @@
 import store from '@/store'
 
 const { body } = document
-const WIDTH = 992 // refer to Bootstrap's responsive design
+const WIDTH = 992 // refer to Bootstrap's responsive design 小于等于该宽度，页面会自动切换到移动端布局
 
 export default {
   watch: {

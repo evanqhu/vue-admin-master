@@ -1,3 +1,4 @@
+<!-- TODO 顶部搜索组件 -->
 <template>
   <div :class="{'show':show}" class="header-search">
     <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
@@ -18,7 +19,7 @@
 </template>
 
 <script>
-// fuse is a lightweight fuzzy-search module
+// fuse is a lightweight fuzzy-search module fuse 是一个轻量级的模糊搜索模块
 // make search results more in line with expectations
 import Fuse from 'fuse.js'
 import path from 'path'

@@ -1,3 +1,4 @@
+<!-- 全局设置 -->
 <template>
   <div class="drawer-container">
     <div>

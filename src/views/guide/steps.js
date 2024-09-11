@@ -1,3 +1,4 @@
+// 引导页 步骤
 const steps = [
   {
     element: '#hamburger-container',

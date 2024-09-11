@@ -1,5 +1,7 @@
+<!-- 布局组件 -->
 <template>
   <div :class="classObj" class="app-wrapper">
+    <!-- 移动端布局左侧边栏遮罩 -->
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <!-- 左侧边栏 sidebar -->
     <sidebar class="sidebar-container" />
@@ -39,19 +41,19 @@ export default {
   },
   mixins: [ResizeMixin],
   computed: {
-    ...mapState({ // Vuex中的数据
+    ...mapState({ // Vuex 中的数据
       sidebar: state => state.app.sidebar,
       device: state => state.app.device,
       showSettings: state => state.settings.showSettings,
       needTagsView: state => state.settings.tagsView,
       fixedHeader: state => state.settings.fixedHeader
     }),
-    // 动态类名，true表示用，false表示不用，根据类名设置不同的样式
+    // 动态类名，true 表示用，false 表示不用，根据类名设置不同的样式
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
-        withoutAnimation: this.sidebar.withoutAnimation,
+        withoutAnimation: this.sidebar.withoutAnimation, // NOTE 防止页面宽度变化时，sidebar 闪动
         mobile: this.device === 'mobile'
       }
     }
@@ -59,6 +61,7 @@ export default {
   created() {
   },
   methods: {
+    // 移动端布局，点击遮罩关闭左侧边栏
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }

@@ -116,7 +116,7 @@ export const asyncRoutes = [
     path: '/permission',
     component: Layout,
     redirect: '/permission/page', // 重定向到第一个 页面权限
-    alwaysShow: true, // will always show the root menu
+    alwaysShow: true, // will always show the root menu 只有一个子路由也会显示为嵌套路由
     name: 'Permission',
     meta: {
       title: 'Permission',

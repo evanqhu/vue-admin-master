@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <!-- 汉堡包菜单 控制侧边栏展开或关闭的 -->
+    <!-- 汉堡包菜单 控制侧边栏展开或关闭的 (id 是留给引导页组件使用的) -->
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <!-- 面包屑导航 -->
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
@@ -11,17 +11,18 @@
         <el-tooltip content="搜索" effect="dark" placement="bottom">
           <search id="header-search" class="right-menu-item" />
         </el-tooltip>
-        <!-- 错误日志，一般不显示，不用 -->
+        <!-- TODO 错误日志，一般不显示，不用 -->
         <error-log class="errLog-container right-menu-item hover-effect" />
         <!-- 全屏 -->
         <el-tooltip content="全屏" effect="dark" placement="bottom">
           <screenfull id="screenfull" class="right-menu-item hover-effect" />
         </el-tooltip>
-        <!-- 布局大小，好像暂时没效果? -->
+        <!-- 布局大小 -->
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
+
       <!-- 用户信息设置 -->
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
@@ -80,7 +81,7 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
-    // 退出登录
+    // 退出登录 (保留当前的路由到 url 的 query 参数中，下次登录后可直接跳转到该路由)
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)

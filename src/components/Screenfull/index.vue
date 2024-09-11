@@ -1,3 +1,4 @@
+<!-- 全屏组件 -->
 <template>
   <div>
     <svg-icon :icon-class="isFullscreen?'exit-fullscreen':'fullscreen'" @click="click" />
@@ -11,7 +12,7 @@ export default {
   name: 'Screenfull',
   data() {
     return {
-      isFullscreen: false
+      isFullscreen: false // 是否全屏 显示不同的 svg
     }
   },
   mounted() {
@@ -21,6 +22,7 @@ export default {
     this.destroy()
   },
   methods: {
+    // 点击切换全屏状态
     click() {
       if (!screenfull.enabled) {
         this.$message({
@@ -31,14 +33,17 @@ export default {
       }
       screenfull.toggle()
     },
+    // 监听全屏状态变化
     change() {
       this.isFullscreen = screenfull.isFullscreen
     },
+    // 组件挂载时绑定全屏事件
     init() {
       if (screenfull.enabled) {
         screenfull.on('change', this.change)
       }
     },
+    // 组件销毁时解绑全屏事件
     destroy() {
       if (screenfull.enabled) {
         screenfull.off('change', this.change)

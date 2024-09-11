@@ -11,7 +11,7 @@ import './styles/element-variables.scss' // 修改 element-ui 主题色
 import '@/styles/index.scss' // global css 全局样式文件
 
 import App from './App' // 引入根组件
-import store from './store' // 引入vuex
+import store from './store' // 引入 Vuex
 import router from './router' // 引入路由
 
 import './icons' // icon 图标组件

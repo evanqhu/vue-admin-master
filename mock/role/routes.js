@@ -2,6 +2,7 @@
 
 const constantRoutes = [
   {
+    // 重定向路由（这条路由的使用场景？）
     path: '/redirect',
     component: 'layout/Layout',
     hidden: true,
@@ -18,6 +19,7 @@ const constantRoutes = [
     hidden: true
   },
   {
+    // 授权重定向路由（这条路由的使用场景？）
     path: '/auth-redirect',
     component: 'views/login/auth-redirect',
     hidden: true

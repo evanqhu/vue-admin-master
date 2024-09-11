@@ -1,3 +1,4 @@
+<!-- NOTE 不知道是什么组件 -->
 <script>
 export default {
   name: 'AuthRedirect',

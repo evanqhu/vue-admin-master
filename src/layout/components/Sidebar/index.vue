@@ -1,6 +1,7 @@
+<!-- 左侧边栏 -->
 <template>
   <div :class="{'has-logo':showLogo}">
-    <!-- 侧边栏logo -->
+    <!-- 侧边栏 logo -->
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
@@ -32,6 +33,7 @@ export default {
       'permission_routes', // 当前角色的全部路由信息 state.permission.routes
       'sidebar'
     ]),
+    // 激活的菜单项
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
