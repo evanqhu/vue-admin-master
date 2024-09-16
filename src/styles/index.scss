@@ -193,3 +193,11 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+// 当引导元素的布局为 fixed 时，元素无法显示，可通过下面方法解决，但不完美，不推荐使用
+// 修改 driver 的 class 样式，通过 outline 模拟背景
+// div#driver-highlighted-element-stage,
+// div#driver-page-overlay {
+//   background: transparent !important;
+//   outline: 5000px solid rgba(0, 0, 0, .75);
+// }

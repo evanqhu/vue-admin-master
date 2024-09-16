@@ -1,17 +1,17 @@
+<!-- 文档组件 -->
 <template>
   <div class="app-container documentation-container">
     <a class="document-btn" target="_blank" href="https://store.akveo.com/products/vue-java-admin-dashboard-spring?utm_campaign=akveo_store-Vue-Vue_demo%2Fgithub&utm_source=vue_admin&utm_medium=referral&utm_content=demo_English_button">Java backend integration</a>
     <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/">Documentation</a>
     <a class="document-btn" target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">Github Repository</a>
     <a class="document-btn" target="_blank" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/">国内文档</a>
-    <!-- :items="articleList"是通过props向子组件传递的参数 -->
     <dropdown-menu class="document-btn" :items="articleList" title="系列文章" />
     <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/zh/job/">内推招聘</a>
   </div>
 </template>
 
 <script>
-import DropdownMenu from '@/components/Share/DropdownMenu' // 引入dropdown组件
+import DropdownMenu from '@/components/Share/DropdownMenu'
 
 export default {
   name: 'Documentation',

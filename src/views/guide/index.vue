@@ -1,3 +1,4 @@
+<!-- 引导页组件 -->
 <template>
   <div class="app-container">
     <aside>
@@ -34,3 +35,5 @@ export default {
   }
 }
 </script>
+
+<!-- NOTE 在使用 fixed header 布局时，引导页会出现样式问题，因此设置默认不固定头部 -->
