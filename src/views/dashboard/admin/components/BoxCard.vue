@@ -1,10 +1,11 @@
 <template>
-  <el-card class="box-card-component" style="margin-left:8px;">
+  <el-card class="box-card-component">
     <div slot="header" class="box-card-header">
       <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png">
     </div>
     <div style="position:relative;">
       <pan-thumb :image="avatar" class="panThumb" />
+      <!-- TODO 暂不清楚 -->
       <mallki class-name="mallki-text" text="vue-element-admin" />
       <div style="padding-top:35px;" class="progress-item">
         <span>Vue</span>
@@ -32,8 +33,8 @@ import PanThumb from '@/components/PanThumb'
 import Mallki from '@/components/TextHoverEffect/Mallki'
 
 export default {
+  name: 'BoxCard',
   components: { PanThumb, Mallki },
-
   filters: {
     statusFilter(status) {
       const statusMap = {

@@ -1,3 +1,4 @@
+<!-- Github 角标 -->
 <template>
   <a href="https://github.com/PanJiaChen/vue-element-admin" target="_blank" class="github-corner" aria-label="View source on Github">
     <svg

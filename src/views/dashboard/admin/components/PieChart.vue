@@ -1,3 +1,4 @@
+<!-- 饼图 -->
 <template>
   <div :class="className" :style="{height:height,width:width}" />
 </template>

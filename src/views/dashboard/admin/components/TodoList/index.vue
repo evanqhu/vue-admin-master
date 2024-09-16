@@ -57,6 +57,7 @@ const defalutList = [
   { text: 'webpack', done: true }
 ]
 export default {
+  name: 'TodoList',
   components: { Todo },
   filters: {
     pluralize: (n, w) => n === 1 ? w : w + 's',

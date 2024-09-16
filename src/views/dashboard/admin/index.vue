@@ -1,6 +1,7 @@
+<!-- 管理员 dashboard 组件 -->
 <template>
-  <div class="dashboard-editor-container">
-    <!-- 右上角GitHub角标 -->
+  <div class="dashboard-admin-container">
+    <!-- 右上角 GitHub 角标 -->
     <github-corner class="github-corner" />
     <!-- 第一行：项目选择面板卡片 -->
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
@@ -26,15 +27,15 @@
         </div>
       </el-col>
     </el-row>
-    <!-- 第四行：Todo list等 -->
-    <el-row :gutter="8">
-      <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
+    <!-- 第四行：Todo list 等 -->
+    <el-row :gutter="16">
+      <el-col :xs="24" :sm="24" :lg="12" class="card-panel-col">
         <transaction-table />
       </el-col>
-      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
+      <el-col :xs="24" :sm="12" :lg="6" class="card-panel-col">
         <todo-list />
       </el-col>
-      <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
+      <el-col :xs="24" :sm="12" :lg="6" class="card-panel-col">
         <box-card />
       </el-col>
     </el-row>
@@ -52,7 +53,7 @@ import TransactionTable from './components/TransactionTable'
 import TodoList from './components/TodoList'
 import BoxCard from './components/BoxCard'
 
-const lineChartData = {
+const lineChartDataAll = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
     actualData: [120, 82, 91, 154, 162, 140, 145]
@@ -86,19 +87,20 @@ export default {
   },
   data() {
     return {
-      lineChartData: lineChartData.newVisitis // 初始展示数据
+      lineChartData: lineChartDataAll.newVisitis // 初始展示数据
     }
   },
   methods: {
+    // 设置折线图数据源
     handleSetLineChartData(type) {
-      this.lineChartData = lineChartData[type]
+      this.lineChartData = lineChartDataAll[type]
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard-editor-container {
+.dashboard-admin-container {
   padding: 32px;
   background-color: rgb(240, 242, 245);
   position: relative;
@@ -115,11 +117,16 @@ export default {
     padding: 16px 16px 0;
     margin-bottom: 32px;
   }
-}
 
-@media (max-width:1024px) {
-  .chart-wrapper {
-    padding: 8px;
+  .card-panel-col {
+    margin-bottom: 32px;
+  }
+
+  // 当页面宽度小于 1200px 时，改变图表的 padding 值
+  @media (max-width:1200px) {
+    .chart-wrapper {
+      padding: 8px 8px 0;
+    }
   }
 }
 </style>

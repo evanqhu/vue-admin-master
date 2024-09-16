@@ -1,5 +1,6 @@
 <template>
   <el-row :gutter="40" class="panel-group">
+    <!-- 栅格的列数默认为 24 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
         <div class="card-panel-icon-wrapper icon-people">
@@ -157,24 +158,25 @@ export default {
         font-size: 20px;
       }
     }
-  }
-}
 
-@media (max-width:550px) {
-  .card-panel-description {
-    display: none;
-  }
+    // 当页面宽度小于 550px 时，图标居中，隐藏文字
+    @media (max-width:550px) {
+      .card-panel-description {
+        display: none;
+      }
 
-  .card-panel-icon-wrapper {
-    float: none !important;
-    width: 100%;
-    height: 100%;
-    margin: 0 !important;
+      .card-panel-icon-wrapper {
+        float: none !important;
+        width: 100%;
+        height: 100%;
+        margin: 0 !important;
 
-    .svg-icon {
-      display: block;
-      margin: 14px auto !important;
-      float: none !important;
+        .svg-icon {
+          display: block;
+          margin: 14px auto !important;
+          float: none !important;
+        }
+      }
     }
   }
 }

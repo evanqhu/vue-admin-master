@@ -1,3 +1,4 @@
+// 监听页面缩放和侧边栏宽度变化，调整图表大小
 import { debounce } from '@/utils'
 
 export default {
@@ -8,6 +9,7 @@ export default {
     }
   },
   mounted() {
+    // 初始化定义图表 resize 方法
     this.$_resizeHandler = debounce(() => {
       if (this.chart) {
         this.chart.resize()
@@ -31,23 +33,26 @@ export default {
     this.$_destroySidebarResizeEvent()
   },
   methods: {
-    // use $_ for mixins properties
-    // https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential
+    // 初始化监听页面缩放事件
     $_initResizeEvent() {
       window.addEventListener('resize', this.$_resizeHandler)
     },
+    // 销毁监听页面缩放事件
     $_destroyResizeEvent() {
       window.removeEventListener('resize', this.$_resizeHandler)
     },
+    // 如果侧边栏宽度变化，则调整图表大小
     $_sidebarResizeHandler(e) {
       if (e.propertyName === 'width') {
         this.$_resizeHandler()
       }
     },
+    // 初始化监听侧边栏缩放事件
     $_initSidebarResizeEvent() {
       this.$_sidebarElm = document.getElementsByClassName('sidebar-container')[0]
       this.$_sidebarElm && this.$_sidebarElm.addEventListener('transitionend', this.$_sidebarResizeHandler)
     },
+    // 销毁监听侧边栏缩放事件
     $_destroySidebarResizeEvent() {
       this.$_sidebarElm && this.$_sidebarElm.removeEventListener('transitionend', this.$_sidebarResizeHandler)
     }

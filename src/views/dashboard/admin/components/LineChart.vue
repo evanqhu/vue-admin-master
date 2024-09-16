@@ -1,11 +1,12 @@
+<!-- 首页 折线图 -->
 <template>
   <div :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
-import resize from './mixins/resize'
+require('echarts/theme/macarons') // echarts theme 主题
+import resize from './mixins/resize' // 监视页面缩放和侧边栏宽度变化，重新渲染图表
 
 export default {
   mixins: [resize],
@@ -33,7 +34,7 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null // 用来存储 echarts 实例
     }
   },
   watch: {
@@ -57,10 +58,13 @@ export default {
     this.chart = null
   },
   methods: {
+    // 初始化图标
     initChart() {
+      // this.$el 表示当前组件的根元素
       this.chart = echarts.init(this.$el, 'macarons')
       this.setOptions(this.chartData)
     },
+    // 设置图标数据
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {

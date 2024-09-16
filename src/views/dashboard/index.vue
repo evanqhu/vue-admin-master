@@ -1,3 +1,4 @@
+<!-- Dashboard 组件 -->
 <template>
   <div class="dashboard-container">
     <!-- 要渲染的实际组件由 is 决定 -->

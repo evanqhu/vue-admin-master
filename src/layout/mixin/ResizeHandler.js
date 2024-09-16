@@ -1,4 +1,4 @@
-// 处理页面缩放的 mixin
+// 处理页面缩放的 mixin，设置设备类型和控制侧边栏的显示
 import store from '@/store'
 
 const { body } = document

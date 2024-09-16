@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="list" style="width: 100%;padding-top: 15px;">
+  <el-table :data="list" style="width: 100%">
     <el-table-column label="Order_No" min-width="200">
       <template slot-scope="scope">
         {{ scope.row.order_no | orderNoFilter }}
@@ -24,6 +24,7 @@
 import { transactionList } from '@/api/remote-search'
 
 export default {
+  name: 'TransactionTable',
   filters: {
     statusFilter(status) {
       const statusMap = {

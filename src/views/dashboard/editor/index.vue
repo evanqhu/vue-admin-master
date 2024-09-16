@@ -1,3 +1,4 @@
+<!-- 编辑者 dashboard 组件 -->
 <template>
   <div class="dashboard-editor-container">
     <div class=" clearfix">
