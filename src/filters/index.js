@@ -2,10 +2,11 @@
 export { parseTime, formatTime } from '@/utils'
 
 /**
- * Show plural label if time is plural number 时间复数
+ * Show plural label if time is plural number
  * @param {number} time
  * @param {string} label
  * @return {string}
+ * @description 时间复数
  */
 function pluralize(time, label) {
   if (time === 1) {
@@ -16,10 +17,12 @@ function pluralize(time, label) {
 
 /**
  * @param {number} time
+ * @description 计算一个时间戳距离现在的时间
  */
 export function timeAgo(time) {
   const between = Date.now() / 1000 - Number(time)
   if (between < 3600) {
+    // 在 JavaScript 中，~~x 的效果和 Math.floor(x) 类似，但效率更高；向下取整
     return pluralize(~~(between / 60), ' minute')
   } else if (between < 86400) {
     return pluralize(~~(between / 3600), ' hour')
@@ -33,6 +36,7 @@ export function timeAgo(time) {
  * like 10000 => 10k
  * @param {number} num
  * @param {number} digits
+ * @description 数字格式化
  */
 export function numberFormatter(num, digits) {
   const si = [
@@ -54,6 +58,7 @@ export function numberFormatter(num, digits) {
 /**
  * 10000 => "10,000"
  * @param {number} num
+ * @description 数字千分位格式化
  */
 export function toThousandFilter(num) {
   return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
@@ -62,6 +67,7 @@ export function toThousandFilter(num) {
 /**
  * Upper case first char
  * @param {String} string
+ * @description 字符串首字母大写
  */
 export function uppercaseFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)

@@ -1,3 +1,4 @@
+// 剪贴板工具函数
 import Vue from 'vue'
 import Clipboard from 'clipboard'
 
@@ -16,7 +17,12 @@ function clipboardError() {
   })
 }
 
-export default function handleClipboard(text, event) {
+/**
+ * @param {string} text 复制的值
+ * @param {Object} event 事件对象
+ * @description 复制到剪贴板
+ */
+export default function handleClipboard(event, text) {
   const clipboard = new Clipboard(event.target, {
     text: () => text
   })
@@ -28,5 +34,6 @@ export default function handleClipboard(text, event) {
     clipboardError()
     clipboard.destroy()
   })
+  // 手动调用 clipboard.onClick(event) 来触发点击事件并执行复制操作
   clipboard.onClick(event)
 }

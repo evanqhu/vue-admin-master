@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import clip from '@/utils/clipboard' // use clipboard directly
-import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive
+import clip from '@/utils/clipboard' // use clipboard directly 使用复制到剪贴板函数
+import clipboard from '@/directive/clipboard/index.js' // use clipboard by v-directive 剪贴板自定义指令
 
 export default {
   name: 'ClipboardDemo',
@@ -34,8 +34,9 @@ export default {
   },
   methods: {
     handleCopy(event, text) {
-      clip(text, event)
+      clip(event, text)
     },
+    // 复制成功的回调
     clipboardSuccess() {
       this.$message({
         message: 'Copy successfully',

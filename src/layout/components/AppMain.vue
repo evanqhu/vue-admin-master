@@ -1,9 +1,10 @@
+<!-- 主要内容组件 -->
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <!-- 使用了keep-alive -->
+      <!-- 使用了 keep-alive -->
       <keep-alive :include="cachedViews">
-        <!-- 它的router-link在Sidebar组件的Link.vue中 -->
+        <!-- 它的 router-link 在 Sidebar 组件的 Link.vue 中 -->
         <router-view :key="key" />
       </keep-alive>
     </transition>
@@ -15,6 +16,7 @@ export default {
   name: 'AppMain',
   computed: {
     cachedViews() {
+      // 只有开启了 tagsView，才会缓存组件
       return this.$store.state.tagsView.cachedViews
     },
     key() {
@@ -26,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
-  /* 50= navbar  50  */
+  /* 50 = navbar  50  */
   min-height: calc(100vh - 50px);
   width: 100%;
   position: relative;
@@ -37,6 +39,7 @@ export default {
   padding-top: 50px;
 }
 
+// 打开标签视图时的样式
 .hasTagsView {
   .app-main {
     /* 84 = navbar + tags-view = 50 + 34 */

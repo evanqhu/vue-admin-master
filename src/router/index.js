@@ -408,8 +408,8 @@ export default router
     roles: ['admin','editor']    control the page roles (you can set multiple roles)
     title: 'title'               the name show in sidebar and breadcrumb (recommend set)
     icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    noCache: true                if set true, the page will no be cached (default is false)
-    affix: true                  if set true, the tag will affix in the tags-view
+    noCache: true                if set true, the page will no be cached (default is false) 当开启 tagsView 时，没有设置 noCache 为 true 的页面均会被默认缓存
+    affix: true                  if set true, the tag will affix in the tags-view 设置 affix 为 true 的页面将会被固定在 tags-view 上，不可点击删除按钮
     breadcrumb: false            if set false, the item will hidden in breadcrumb (default is true)
     activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
   }

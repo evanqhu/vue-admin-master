@@ -1,3 +1,4 @@
+// 标签视图（只有打开标签视图，组件缓存才会被启用，默认组件都会被缓存，只有在 meta 中设置的 noCache 的路由组件才不会被缓存）
 const state = {
   visitedViews: [],
   cachedViews: []

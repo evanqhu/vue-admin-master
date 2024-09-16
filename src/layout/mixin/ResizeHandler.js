@@ -1,4 +1,4 @@
-// 处理页面缩放 mixin
+// 处理页面缩放的 mixin
 import store from '@/store'
 
 const { body } = document
