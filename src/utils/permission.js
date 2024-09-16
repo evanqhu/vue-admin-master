@@ -1,10 +1,11 @@
-// 权限判断函数，功能类似于v-permission自定义指令
+// 权限判断函数，功能类似于 v-permission 自定义指令
 import store from '@/store'
 
 /**
  * @param {Array} value
  * @returns {Boolean}
  * @example see @/views/permission/directive.vue
+ * @description 权限判断函数
  */
 export default function checkPermission(value) {
   if (value && value instanceof Array && value.length > 0) {

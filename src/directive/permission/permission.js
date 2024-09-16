@@ -1,9 +1,10 @@
+// 权限相关自定义指令
 import store from '@/store'
 
-// 全局指令函数 el：真实的DOM元素；binding：绑定的元素对象(也就是指令等号后面的表达式)
+// 全局指令函数 el：真实的 DOM 元素；binding：绑定的元素对象，其 value 值就是等号右边的值
 function checkPermission(el, binding) {
-  const { value } = binding // 这里的value一般是一个roles相关的数组
-  const roles = store.getters && store.getters.roles // 当前账户的角色数组(短路运算，如果左边为真则返回右边)
+  const { value } = binding // 这里的 value 一般是一个 roles 相关的数组 v-permission="['admin']"
+  const roles = store.getters && store.getters.roles // 当前账户的角色数组
 
   if (value && value instanceof Array) {
     if (value.length > 0) {
@@ -12,7 +13,7 @@ function checkPermission(el, binding) {
         return permissionRoles.includes(role)
       })
       if (!hasPermission) {
-        el.parentNode && el.parentNode.removeChild(el) // 如果没有权限则移除该节点
+        el.parentNode && el.parentNode.removeChild(el) // 如果没有权限则从其父节点中移除该子节点
       }
     }
   } else {

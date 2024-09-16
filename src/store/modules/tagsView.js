@@ -125,6 +125,7 @@ const actions = {
     })
   },
 
+  // 删除所有 tagsView（切换角色信息时）
   delAllViews({ dispatch, state }, view) {
     return new Promise(resolve => {
       dispatch('delAllVisitedViews', view)

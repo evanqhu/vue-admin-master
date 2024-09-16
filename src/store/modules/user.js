@@ -75,7 +75,7 @@ const actions = {
     })
   },
 
-  // remove token
+  // remove token 移除 token
   resetToken({ commit }) {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
@@ -88,17 +88,17 @@ const actions = {
   // 更改用户角色信息
   async changeRoles({ commit, dispatch }, role) {
     const token = role + '-token'
-    commit('SET_TOKEN', token) // 更改token
+    commit('SET_TOKEN', token) // 更改 token
     setToken(token)
     const { roles } = await dispatch('getInfo') // 重新获取用户信息
     resetRouter() // 重置常量路由信息
 
-    // generate accessible routes map based on roles
+    // generate accessible routes map based on roles 基于角色生成可访问的路由表
     const accessRoutes = await dispatch('permission/generateRoutes', roles, { root: true })
     // dynamically add accessible routes
     router.addRoutes(accessRoutes)
 
-    // reset visited views and cached views
+    // reset visited views and cached views 重置已访问的路由和缓存的路由
     dispatch('tagsView/delAllViews', null, { root: true })
   }
 }

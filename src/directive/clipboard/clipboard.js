@@ -10,6 +10,7 @@ if (!ClipboardJS) {
 export default {
   bind(el, binding) {
     // el：指令所绑定的元素，可以用来直接操作 DOM (button.el-button.el-button--primary.el-button--medium)
+    // v-clipboard:copy="https://github.com/PanJiaChen/vue-element-admin"
     // binding：指令所绑定的元素对象
     // {
     //   name: 'clipboard',

@@ -43,7 +43,7 @@ const state = {
 }
 
 const actions = {
-  // 根据用户角色信息获取待添加的动态路由表
+  // 根据用户角色信息和路由的 meta 中的 roles 来获取待添加的动态路由表
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes

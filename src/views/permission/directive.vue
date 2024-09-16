@@ -1,10 +1,12 @@
+<!-- Permission 指令权限 -->
 <template>
   <div class="app-container">
     <!-- 切换角色的组件 -->
     <switch-roles @change="handleRolesChange" />
+
     <!-- 自定义指令权限控制 -->
     <div :key="key" style="margin-top:30px;">
-      <!-- 自定义指令 admin -->
+      <!-- admin -->
       <div>
         <span v-permission="['admin']" class="permission-alert">
           Only <el-tag class="permission-tag" size="small">admin</el-tag> can see this
@@ -13,7 +15,7 @@
           v-permission="['admin']"
         </el-tag>
       </div>
-      <!-- 自定义指令 editor -->
+      <!-- editor -->
       <div>
         <span v-permission="['editor']" class="permission-alert">
           Only <el-tag class="permission-tag" size="small">editor</el-tag> can see this
@@ -22,7 +24,7 @@
           v-permission="['editor']"
         </el-tag>
       </div>
-      <!-- 自定义指令 admin editor -->
+      <!-- admin and editor -->
       <div>
         <span v-permission="['admin','editor']" class="permission-alert">
           Both
@@ -34,7 +36,8 @@
         </el-tag>
       </div>
     </div>
-    <!-- v-if权限控制 -->
+
+    <!-- v-if 权限控制 -->
     <div :key="'checkPermission'+key" style="margin-top:30px;">
       <aside>
         In some cases, using v-permission will have no effect. For example: Element-UI's Tab component or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.
@@ -93,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 .app-container {
-  ::v-deep .permission-alert {
+  .permission-alert {
     width: 320px;
     margin-top: 15px;
     background-color: #f0f9eb;
@@ -102,10 +105,10 @@ export default {
     border-radius: 4px;
     display: inline-block;
   }
-  ::v-deep .permission-sourceCode {
+  .permission-sourceCode {
     margin-left: 15px;
   }
-  ::v-deep .permission-tag {
+  .permission-tag {
     background-color: #ecf5ff;
   }
 }
