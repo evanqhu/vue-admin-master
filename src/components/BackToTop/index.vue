@@ -1,3 +1,4 @@
+<!-- 回到顶部 -->
 <template>
   <transition :name="transitionName">
     <div v-show="visible" :style="customStyle" class="back-to-ceiling" @click="backToTop">
@@ -10,10 +11,12 @@
 export default {
   name: 'BackToTop',
   props: {
+    // 当滚动高度超过该值时，显示回到顶部按钮
     visibilityHeight: {
       type: Number,
       default: 400
     },
+    // 滚动回到顶部时的位置，距离顶部多少距离，0 表示滚动到最上方
     backPosition: {
       type: Number,
       default: 0
@@ -41,7 +44,7 @@ export default {
     return {
       visible: false,
       interval: null,
-      isMoving: false
+      isMoving: false // 滚动条是否在移动
     }
   },
   mounted() {
@@ -54,26 +57,35 @@ export default {
     }
   },
   methods: {
+    // 滚动事件回调
     handleScroll() {
-      this.visible = window.pageYOffset > this.visibilityHeight
+      this.visible = window.scrollY > this.visibilityHeight
     },
+    // 回到顶部事件
     backToTop() {
-      if (this.isMoving) return
-      const start = window.pageYOffset
-      let i = 0
-      this.isMoving = true
-      this.interval = setInterval(() => {
-        const next = Math.floor(this.easeInOutQuad(10 * i, start, -start, 500))
-        if (next <= this.backPosition) {
-          window.scrollTo(0, this.backPosition)
-          clearInterval(this.interval)
-          this.isMoving = false
-        } else {
-          window.scrollTo(0, next)
-        }
-        i++
-      }, 16.7)
+      if (this.isMoving) return // 如果当前正在滚动，则直接返回，避免多个动画同时进行
+      window.scrollTo({
+        top: this.backPosition,
+        behavior: 'smooth' // 平滑滚动
+      })
+
+      // 手动实现的平滑滚动的方案
+      // const start = window.scrollY // 获取当前滚动条的垂直位置
+      // let i = 0 // 初始化一个计数器
+      // this.isMoving = true // 设置标志位，表示正在滚动
+      // this.interval = setInterval(() => {
+      //   const next = Math.floor(this.easeInOutQuad(10 * i, start, -start, 500))
+      //   if (next <= this.backPosition) {
+      //     window.scrollTo(0, this.backPosition)
+      //     clearInterval(this.interval)
+      //     this.isMoving = false
+      //   } else {
+      //     window.scrollTo(0, next)
+      //   }
+      //   i++
+      // }, 16.7)
     },
+    // 二次方缓动函数
     easeInOutQuad(t, b, c, d) {
       if ((t /= d / 2) < 1) return c / 2 * t * t + b
       return -c / 2 * (--t * (t - 2) - 1) + b

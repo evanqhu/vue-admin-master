@@ -1,3 +1,4 @@
+<!-- 拖拽区域组件 -->
 <template>
   <div :id="id" :ref="id" :action="url" class="dropzone">
     <input type="file" name="file">

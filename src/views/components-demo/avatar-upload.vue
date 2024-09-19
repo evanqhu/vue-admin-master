@@ -1,3 +1,4 @@
+<!-- 头像上传组件 -->
 <template>
   <div class="components-container">
     <aside>This is based on
@@ -17,7 +18,7 @@
       :width="300"
       :height="300"
       url="https://httpbin.org/post"
-      lang-type="en"
+      lang-type="zh"
       @close="close"
       @crop-upload-success="cropSuccess"
     />
@@ -44,6 +45,7 @@ export default {
       this.imagecropperKey = this.imagecropperKey + 1
       this.image = resData.files.avatar
     },
+    // 关闭图片裁剪组件弹窗
     close() {
       this.imagecropperShow = false
     }
@@ -52,10 +54,10 @@ export default {
 </script>
 
 <style scoped>
-  .avatar{
+  /* .avatar {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-  }
+  } */
 </style>
 

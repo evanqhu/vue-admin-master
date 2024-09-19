@@ -1,3 +1,4 @@
+<!-- 粘性定位 -->
 <template>
   <div>
     <sticky :z-index="10" class-name="sub-navbar">

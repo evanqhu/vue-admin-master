@@ -1,3 +1,4 @@
+<!-- 分割面板组件 -->
 <template>
   <div class="components-container">
     <aside><strong>SplitPane</strong> If you've used

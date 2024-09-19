@@ -111,7 +111,7 @@ export default {
       const res = await getRoles()
       this.rolesList = res.data
     },
-    // 让路由列表变得和侧边栏一样(比如把不显示的路由去掉，像404，redirect等)
+    // 让路由列表变得和侧边栏一样(比如把不显示的路由去掉，像 404，redirect 等)
     generateRoutes(routes, basePath = '/') {
       const res = []
       for (let route of routes) {

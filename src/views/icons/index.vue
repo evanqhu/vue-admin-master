@@ -8,7 +8,7 @@
       <!-- 自己下载的图标 -->
       <el-tab-pane label="Icons">
         <div class="grid">
-          <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateIconCode(item), $event)">
+          <div v-for="item of svgIcons" :key="item" @click="handleClipboard($event, generateIconCode(item))">
             <el-tooltip placement="top">
               <div slot="content">
                 {{ generateIconCode(item) }}
@@ -24,13 +24,13 @@
       <!-- element ui自带图标 -->
       <el-tab-pane label="Element-UI Icons">
         <div class="grid">
-          <div v-for="item of elementIcons" :key="item" @click="handleClipboard(generateElementIconCode(item),$event)">
+          <div v-for="item of elementIcons" :key="item" @click="handleClipboard($event, generateElementIconCode(item))">
             <el-tooltip placement="top">
               <div slot="content">
                 {{ generateElementIconCode(item) }}
               </div>
               <div class="icon-item">
-                <i :class="'el-icon-' + item" />
+                <i :class="`el-icon-${item}`" />
                 <span>{{ item }}</span>
               </div>
             </el-tooltip>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import clipboard from '@/utils/clipboard' // 点击即复制的工具
+import clipboard from '@/utils/clipboard'
 import svgIcons from './svg-icons'
 import elementIcons from './element-icons'
 
@@ -55,17 +55,17 @@ export default {
     }
   },
   methods: {
-    // 生成自定义Icon标签
+    // 生成自定义 Icon 标签
     generateIconCode(symbol) {
       return `<svg-icon icon-class="${symbol}" />`
     },
-    // 生成element Icon标签
+    // 生成 element Icon 标签
     generateElementIconCode(symbol) {
       return `<i class="el-icon-${symbol}" />`
     },
     // 点击复制
-    handleClipboard(text, event) {
-      clipboard(text, event)
+    handleClipboard(event, text) {
+      clipboard(event, text)
     }
   }
 }

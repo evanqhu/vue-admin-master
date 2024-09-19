@@ -1,3 +1,4 @@
+<!-- 回到顶部 -->
 <template>
   <div class="components-container">
     <aside>
@@ -119,7 +120,7 @@
     </div>
     <!-- you can add element-ui's tooltip -->
     <el-tooltip placement="top" content="回到顶部">
-      <back-to-top :custom-style="myBackToTopStyle" :visibility-height="300" :back-position="50" transition-name="fade" />
+      <back-to-top :custom-style="myBackToTopStyle" :visibility-height="300" />
     </el-tooltip>
   </div>
 </template>

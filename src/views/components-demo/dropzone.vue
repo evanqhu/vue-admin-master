@@ -1,3 +1,4 @@
+<!-- 拖拽区域 -->
 <template>
   <div class="components-container">
     <aside>

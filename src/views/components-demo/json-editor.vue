@@ -1,3 +1,4 @@
+<!-- JSON 编辑器 -->
 <template>
   <div class="components-container">
     <aside>Json-Editor is base on <a href="https://github.com/codemirror/CodeMirror" target="_blank">CodeMirrorr</a>. Lint

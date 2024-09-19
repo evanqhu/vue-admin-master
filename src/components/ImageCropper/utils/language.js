@@ -1,3 +1,4 @@
+// 图片裁剪组件的语言包
 export default {
   zh: {
     hint: '点击，或拖动图片至此处',

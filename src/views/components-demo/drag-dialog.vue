@@ -1,3 +1,4 @@
+<!-- 可拖拽对话框 -->
 <template>
   <div class="components-container">
     <el-button type="primary" @click="dialogTableVisible = true">
@@ -54,7 +55,9 @@ export default {
   },
   methods: {
     // v-el-drag-dialog onDrag callback function
+    // 拖拽事件回调
     handleDrag() {
+      // 使 input 失去焦点，并隐藏下拉框
       this.$refs.select.blur()
     }
   }

@@ -1,11 +1,15 @@
+<!-- 图片裁剪组件 -->
 <template>
   <div v-show="value" class="vue-image-crop-upload">
     <div class="vicp-wrap">
+      <!-- 右上角关闭按钮， -->
       <div class="vicp-close" @click="off">
         <i class="vicp-icon4" />
       </div>
 
+      <!-- 第一步：点击或拖动图片至此处 -->
       <div v-show="step == 1" class="vicp-step1">
+        <!-- 图片拖动区域 -->
         <div
           class="vicp-drop-area"
           @dragleave="preventDefault"
@@ -21,17 +25,21 @@
           </i>
           <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
           <span v-show="!isSupported" class="vicp-no-supported-hint">{{ lang.noSupported }}</span>
-          <input v-show="false" v-if="step == 1" ref="fileinput" type="file" @change="handleChange">
+          <!-- 文件上传的 input 标签 -->
+          <input v-show="false" v-if="step == 1" ref="fileInput" type="file" @change="handleChange">
         </div>
+        <!-- 图片上传错误信息 -->
         <div v-show="hasError" class="vicp-error">
           <i class="vicp-icon2" />
           {{ errorMsg }}
         </div>
+        <!-- 取消按钮，关闭组件 -->
         <div class="vicp-operate">
           <a @click="off" @mousedown="ripple">{{ lang.btn.off }}</a>
         </div>
       </div>
 
+      <!-- 第二步 -->
       <div v-if="step == 2" class="vicp-step2">
         <div class="vicp-crop">
           <div v-show="true" class="vicp-crop-left">
@@ -109,6 +117,7 @@
         </div>
       </div>
 
+      <!-- 第三步 -->
       <div v-if="step == 3" class="vicp-step3">
         <div class="vicp-upload">
           <span v-show="loading === 1" class="vicp-loading">{{ lang.loading }}</span>
@@ -141,6 +150,7 @@ import language from './utils/language.js'
 import mimes from './utils/mimes.js'
 import data2blob from './utils/data2blob.js'
 import effectRipple from './utils/effectRipple.js'
+
 export default {
   props: {
     // 域，上传文件name，触发事件会带上（如果一个页面多个图片上传控件，可以做区分
@@ -230,7 +240,7 @@ export default {
     const allowImgFormat = ['jpg', 'png']
     const tempImgFormat =
       allowImgFormat.indexOf(imgFormat) === -1 ? 'jpg' : imgFormat
-    const lang = language[langType] ? language[langType] : language['en']
+    const lang = language[langType] ? language[langType] : language['en'] // 语言包
     const mime = mimes[tempImgFormat]
     // 规范图片格式
     this.imgFormat = tempImgFormat
@@ -262,7 +272,7 @@ export default {
       ratio: width / height,
       // 原图地址、生成图片地址
       sourceImg: null,
-      sourceImgUrl: '',
+      sourceImgUrl: '', // 读取的原图片文件的 base64 编码字符串
       createImgUrl: '',
       // 原图片拖动事件初始值
       sourceImgMouseDown: {
@@ -332,18 +342,20 @@ export default {
     // 原图蒙版属性
     sourceImgMasking() {
       const { width, height, ratio, sourceImgContainer } = this
-      const sic = sourceImgContainer
+      const sic = sourceImgContainer // 原图容器宽高
       const sicRatio = sic.width / sic.height // 原图容器宽高比
       let x = 0
       let y = 0
       let w = sic.width
       let h = sic.height
       let scale = 1
+      // 需求图宽高比小于原图容器宽高比，则高度撑满容器，宽度按比例缩放
       if (ratio < sicRatio) {
         scale = sic.height / height
         w = sic.height * ratio
         x = (sic.width - w) / 2
       }
+      // 需求图宽高比大于原图容器宽高比，则宽度撑满容器，高度按比例缩放
       if (ratio > sicRatio) {
         scale = sic.width / width
         h = sic.width / ratio
@@ -412,6 +424,7 @@ export default {
     off() {
       setTimeout(() => {
         this.$emit('input', false)
+        // 关闭弹窗
         this.$emit('close')
         if (this.step === 3 && this.loading === 2) {
           this.setStep(1)
@@ -425,22 +438,24 @@ export default {
         this.step = no
       }, 200)
     },
-    /* 图片选择区域函数绑定
-     ---------------------------------------------------------------*/
+    // 阻止默认事件
     preventDefault(e) {
       e.preventDefault()
       return false
     },
+    // 点击上传图片
     handleClick(e) {
       if (this.loading !== 1) {
-        if (e.target !== this.$refs.fileinput) {
+        if (e.target !== this.$refs.fileInput) {
           e.preventDefault()
+          // activeElement 属性返回 DOM 中当前拥有焦点的 Element。
           if (document.activeElement !== this.$refs) {
-            this.$refs.fileinput.click()
+            this.$refs.fileInput.click() // 触发 input 的点击事件，即打开文件选择弹窗
           }
         }
       }
     },
+    // 选择文件后的回调
     handleChange(e) {
       e.preventDefault()
       if (this.loading !== 1) {
@@ -452,7 +467,7 @@ export default {
       }
     },
     /* ---------------------------------------------------------------*/
-    // 检测选择的文件是否合适
+    // 检测选择的文件是否合适，不合适则生成错误提示信息
     checkFile(file) {
       const { lang, maxSize } = this
       // 仅限图片
@@ -479,10 +494,16 @@ export default {
     // 设置图片源
     setSourceImg(file) {
       const fr = new FileReader()
+      // 为 FileReader 对象的 onload 事件添加一个监听函数
       fr.onload = e => {
         this.sourceImgUrl = fr.result
         this.startCrop()
       }
+      /**
+       * readAsDataURL 用于读取指定的 Blob 或 File 对象的内容
+       * 当读操作完成时，result 属性包含作为 data: URL 的数据
+       * 将文件的数据表示为 base64 编码字符串
+       */
       fr.readAsDataURL(file)
     },
     // 剪裁前准备工作
@@ -496,13 +517,13 @@ export default {
         sourceImgMasking,
         lang
       } = this
-      const sim = sourceImgMasking
+      const sim = sourceImgMasking // 原图蒙版属性
       const img = new Image()
       img.src = sourceImgUrl
       img.onload = () => {
-        const nWidth = img.naturalWidth
-        const nHeight = img.naturalHeight
-        const nRatio = nWidth / nHeight
+        const nWidth = img.naturalWidth // 图片原始宽度
+        const nHeight = img.naturalHeight // 图片原始高度
+        const nRatio = nWidth / nHeight // 图片原始比例
         let w = sim.width
         let h = sim.height
         let x = 0
@@ -902,6 +923,7 @@ export default {
   right: -30px;
   top: -30px;
 }
+// 关闭图标
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4 {
   position: relative;
   display: block;
@@ -916,6 +938,7 @@ export default {
   -ms-transform: rotate(0);
   transform: rotate(0);
 }
+// 关闭图标的两条斜线
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::after,
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4::before {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.23);
@@ -936,6 +959,7 @@ export default {
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
+// 鼠标移入时关闭图标旋转
 .vue-image-crop-upload .vicp-wrap .vicp-close .vicp-icon4:hover {
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
