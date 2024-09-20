@@ -1,6 +1,6 @@
+<!-- 导出 Excel -->
 <template>
   <div class="app-container">
-
     <div class="filter-container">
       <FilenameOption v-model="filename" class="filter-item" />
       <AutoWidthOption v-model="autoWidth" class="filter-item" />
@@ -67,6 +67,7 @@ export default {
     this.fetchData()
   },
   methods: {
+    // 获取表格数据
     fetchData() {
       this.listLoading = true
       fetchList().then(response => {
@@ -74,23 +75,28 @@ export default {
         this.listLoading = false
       })
     },
+    // 导出 Excel
     handleDownload() {
       this.downloadLoading = true
+      // 使用懒加载导入模块
       import('@/vendor/Export2Excel').then(excel => {
         const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
         const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
         const list = this.list
+        console.log('🚀🚀🚀  list: ', list)
         const data = this.formatJson(filterVal, list)
+        console.log('🚀🚀🚀 data: ', data)
         excel.export_json_to_excel({
-          header: tHeader,
-          data,
-          filename: this.filename, // 文件名
-          autoWidth: this.autoWidth, // 自动调整列宽
-          bookType: this.bookType // 文件格式
+          header: tHeader, // 表头 必填
+          data, // 具体数据 必填
+          filename: this.filename, // 文件名 非必填
+          autoWidth: this.autoWidth, // 自动调整列宽 非必填
+          bookType: this.bookType // 文件格式 非必填
         })
         this.downloadLoading = false
       })
     },
+    // 格式化 json 数据
     formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => {
         if (j === 'timestamp') {

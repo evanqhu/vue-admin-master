@@ -1,3 +1,4 @@
+<!-- 主题色配置 -->
 <template>
   <div class="app-container">
     <el-card class="box-card">

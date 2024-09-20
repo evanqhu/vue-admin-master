@@ -1,6 +1,7 @@
+// TODO 基于 xlsx 封装的导出 excel 文件模块
 /* eslint-disable */
 import { saveAs } from 'file-saver'
-import XLSX from 'xlsx'
+import XLSX from 'xlsx' // https://www.npmjs.com/package/xlsx
 
 function generateArray(table) {
   var out = [];
@@ -156,7 +157,7 @@ export function export_json_to_excel({
   /* original data */
   filename = filename || 'excel-list'
   data = [...data]
-  data.unshift(header);
+  data.unshift(header); // 添加表头
 
   for (let i = multiHeader.length - 1; i > -1; i--) {
     data.unshift(multiHeader[i])
