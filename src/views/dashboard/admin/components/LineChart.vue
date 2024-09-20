@@ -6,7 +6,7 @@
 <script>
 import echarts from 'echarts'
 require('echarts/theme/macarons') // echarts theme 主题
-import resize from './mixins/resize' // 监视页面缩放和侧边栏宽度变化，重新渲染图表
+import resize from '@/mixins/chartResize'
 
 export default {
   mixins: [resize],

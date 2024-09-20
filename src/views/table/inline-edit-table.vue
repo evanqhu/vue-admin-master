@@ -1,3 +1,4 @@
+<!-- 行内编辑表格 -->
 <template>
   <div class="app-container">
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
@@ -82,7 +83,7 @@ import { fetchList } from '@/api/article'
 
 export default {
   name: 'InlineEditTable',
-  // 过滤器，根据状态返回tag类型
+  // 过滤器，根据状态返回 tag 类型
   filters: {
     statusFilter(status) {
       const statusMap = {

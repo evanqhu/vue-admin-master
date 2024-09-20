@@ -1,10 +1,11 @@
+<!-- 混合图表 -->
 <template>
   <div :id="id" :class="className" :style="{height:height,width:width}" />
 </template>
 
 <script>
 import echarts from 'echarts'
-import resize from './mixins/resize'
+import resize from '@/mixins/chartResize'
 
 export default {
   mixins: [resize],

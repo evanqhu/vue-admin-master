@@ -1,3 +1,4 @@
+<!-- 可拖拽排序列表 Draggable and Droppable List -->
 <template>
   <div class="dndList">
     <div :style="{width:width1}" class="dndList-list">

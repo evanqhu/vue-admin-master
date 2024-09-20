@@ -1,3 +1,4 @@
+<!-- 可拖拽看板 -->
 <template>
   <div class="board-column">
     <div class="board-column-header">

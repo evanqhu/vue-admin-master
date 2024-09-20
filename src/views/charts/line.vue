@@ -1,3 +1,4 @@
+<!-- 折线图 -->
 <template>
   <div class="chart-container">
     <chart height="100%" width="100%" />

@@ -1,4 +1,5 @@
 // 监听页面缩放和侧边栏宽度变化，调整图表大小
+// 使用该 mixin 的组件中必须定义 this.chart 作为图表实例
 import { debounce } from '@/utils'
 
 export default {

@@ -1,3 +1,4 @@
+<!-- 可拖拽看板 -->
 <template>
   <div class="components-container board">
     <Kanban :key="1" :list="list1" :group="group" class="kanban todo" header-text="Todo" />

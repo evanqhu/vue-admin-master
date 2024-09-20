@@ -1,3 +1,4 @@
+<!-- 键盘图表 -->
 <template>
   <div class="chart-container">
     <chart height="100%" width="100%" />

@@ -48,7 +48,7 @@ export default {
   watch: {
     checkboxVal(valArr) {
       this.formThead = this.formTheadOptions.filter(i => valArr.indexOf(i) >= 0)
-      this.key = this.key + 1 // 为了保证table 每次都会重渲 In order to ensure the table will be re-rendered each time
+      this.key = this.key + 1 // 为了保证 table 每次都会重渲
     }
   }
 }
