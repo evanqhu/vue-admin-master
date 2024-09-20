@@ -1,4 +1,5 @@
-const Mock = require('mockjs')
+// mockjs 入口文件
+const Mock = require('mockjs') // 引入 mockjs 模块
 const { param2Obj } = require('./utils')
 
 const user = require('./user')
@@ -54,13 +55,14 @@ function mockXHR() {
   }
 
   // 遍历所有 mocks 中的配置，创建每一个 mock 请求
-  for (const i of mocks) {
+  for (const item of mocks) {
     /**
      * new RegExp(i.url) 将接口的 URL 转换为正则表达式，用于匹配请求的路径
-     * i.type || 'get' 指定请求的类型（默认为 get）
-     * XHR2ExpressReqWrap(i.response) 将响应包装成符合 XHR 风格的请求响应处理
+     * item.type || 'get' 指定请求的类型（默认为 get）
+     * XHR2ExpressReqWrap(item.response) 将响应包装成符合 XHR 风格的请求响应处理
+     * 匹配到的所有 url 的请求都会被拦截，并返回对应的响应数据；未匹配到的请求会正常通过 axios 发送到服务器
      */
-    Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
+    Mock.mock(new RegExp(item.url), item.type || 'get', XHR2ExpressReqWrap(item.response))
   }
 }
 

@@ -36,6 +36,7 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    // 在开发服务器启动之前设置自定义中间件，参数是 Express 的实例
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {

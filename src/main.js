@@ -27,6 +27,10 @@ import * as filters from './filters' // 引入全局过滤器
  *
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
+ *
+ * 目前使用两种方法实现 mock 数据，第一种是使用 mock-server，第二种是使用 MockJs
+ * 使用 mock-server 是在 vue.config.js 中配置，优点是在浏览器的 Network 中可以看到请求的 api
+ * 使用 MockJs 是在 main.js 中配置，直接调用 mockXHR() 方法，配置比较简单，但是在浏览器的 Network 中看不到请求的 api
  */
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
