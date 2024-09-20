@@ -83,9 +83,7 @@ export default {
         const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
         const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
         const list = this.list
-        console.log('🚀🚀🚀  list: ', list)
         const data = this.formatJson(filterVal, list)
-        console.log('🚀🚀🚀 data: ', data)
         excel.export_json_to_excel({
           header: tHeader, // 表头 必填
           data, // 具体数据 必填
