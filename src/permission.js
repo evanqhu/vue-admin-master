@@ -60,7 +60,7 @@ router.beforeEach(async(to, from, next) => {
            * 如果 addRoutes 并未完成，路由守卫会一层一层的执行执行，直到 addRoutes 完成，找到对应的路由
            * https://router.vuejs.org/zh/guide/advanced/navigation-guards
            */
-          // hack method to ensure that addRoutes is complete
+          // hack方法 确保 addRoutes 已完成
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (error) {
@@ -74,10 +74,10 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
-      // in the free login whitelist, go directly 白名单中的路径直接放行
+      // 白名单中的路径直接放行
       next()
     } else {
-      // other pages that do not have permission to access are redirected to the login page 其他没有权限的路径重定向到登录页
+      // 其他没有权限的路径重定向到登录页
       next(`/login?redirect=${to.path}`)
       NProgress.done()
     }

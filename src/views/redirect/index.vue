@@ -1,4 +1,5 @@
-<!-- NOTE 重定向组件 -->
+<!-- 重定向组件 -->
+<!-- 用于不刷新页面的情况下更新页面 -->
 <script>
 export default {
   created() {

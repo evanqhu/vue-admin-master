@@ -1,6 +1,7 @@
 ```bash
 ├─build 
 ├─mock                            # 模拟数据
+├─plop-templates                  # 代码生成器，类似于代码片段
 ├─public                          # 静态资源
 ├─src                             # 源代码目录
 │  ├─api                          # 后端接口(网络请求)
